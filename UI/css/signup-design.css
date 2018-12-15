@@ -1,0 +1,20 @@
+
+.user_info{
+    margin:auto;
+    background-color: white;
+    width:500px;
+    height: 500px;
+    opacity:0.9;
+    border-radius: 8px;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.signup-title{
+	color:#64BD63;
+	font-size: 20px;]
+	padding-top: 10px;	
+	font-family: sans-serif;
+}
+
+
