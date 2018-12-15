@@ -1,0 +1,131 @@
+
+body{
+	margin: 0px;
+	padding: 0px;
+	background-color: #64BD63;
+}
+header{
+	width: 100%;
+	display: inline-block;
+}
+
+.menu{
+
+	float: left;
+	display: inline-block;
+}
+
+.login-part{
+	margin-top: 30px;
+	float: right;
+	display: inline-block;
+}
+}
+
+ul{
+
+	list-style-type: none;
+
+}
+
+li{
+	display: inline;
+	
+}
+
+.menu1{
+	margin-right: 17px;
+
+}
+
+
+
+
+.sign-up{
+	padding: 8px;
+	border-radius: 4px;
+	font-family: sans-serif;
+	font-size: 16px;
+	border:2px solid white;
+	color: white;
+    background-color: transparent;
+    margin-right:15px;
+	
+
+}
+
+.login{
+	padding: 8px;
+	border-radius: 4px;
+	font-family: sans-serif;
+	font-size: 16px;
+	background-color: white;
+	color:#64BD63;
+	border:2px solid white;
+	margin-right: 55px;
+
+}
+
+a{
+	text-decoration: none;
+	color: white;
+	font-size: 17px;
+	font-family: sans-serif;
+}
+
+a:visited{
+	text-decoration: underline;
+}
+
+a:hover{
+	text-decoration: underline;
+}
+
+.icon1{
+ margin-right: 35px;
+}
+
+.icon{
+	color: white;
+	font-size: 35px;
+
+}
+
+.content{
+	font-family: sans-serif;
+    margin-top: 240px;
+	text-align:center;
+}
+
+.content1{
+    line-height: 0.5;
+	color: white;
+	font-size: 35px;
+
+}
+
+.content2{
+	line-height: 0.3;
+  color: white;
+  font-size: 23px;
+
+}
+
+a.content4{
+	text-align: center;
+}
+
+.content a{
+	font-size: 20px;
+	margin-right: 30px;
+}
+
+.main{
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+ a: hover{
+
+      text-decoration: underline;
+}
