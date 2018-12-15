@@ -73,9 +73,7 @@ a{
 	font-family: sans-serif;
 }
 
-a:visited{
-	text-decoration: underline;
-}
+
 
 a:hover{
 	text-decoration: underline;
@@ -111,7 +109,7 @@ a:hover{
 
 }
 
-a.content4{
+a .content4{
 	text-align: center;
 }
 
@@ -125,7 +123,4 @@ a.content4{
 	margin-right: 50px;
 }
 
- a: hover{
-
-      text-decoration: underline;
-}
+ 
