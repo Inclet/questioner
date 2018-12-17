@@ -27,6 +27,7 @@ input{
 	padding: 12px 2px;
 	border-radius: 4px;
 	border:2px solid #64BD63;
+	text-align: center;
 
 }
 
@@ -54,10 +55,16 @@ form{
 }
 
 .signup_link{
-margin-top:30px; 	
-margin-left: 170px;
+margin-top:25px; 	
+margin-left: 156px;
 border:2px solid #64BD63;
 border-radius: 4px;
 padding:10px;
-width: 44%;
+width: 33%;
+}
+
+
+.main{
+	margin-left: 50px;
+	margin-right: 50px;
 }
