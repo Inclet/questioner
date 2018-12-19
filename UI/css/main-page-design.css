@@ -11,7 +11,7 @@ header{
 	width: 100%;
 	display: inline-block;
 	background-color: #63BD64;
-	z-index: 
+	z-index:2; 
 }
 
 .menu{
@@ -64,6 +64,8 @@ header{
 .main1{
 	margin-right: 50px;
 	margin-left: 50px;
+	height: 100%;
+	
 }
 
 .user-summary{
