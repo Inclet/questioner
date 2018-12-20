@@ -1,0 +1,161 @@
+.posted-summary{
+  margin-left:25%;
+  margin-top: 10%;
+  padding-bottom: 5px;
+  background-color: white;
+  width: 60%;
+  z-index: 1;
+  border-radius: 8px;
+}
+
+
+.comment-num{
+	padding-left: 30px;
+	vertical-align: middle;
+	font-size: 15px;
+	font-family: sans-serif;
+    font-weight: bold;
+    color: grey;
+}
+
+.num{
+	vertical-align: middle;
+	font-size: 15px;
+	font-family: sans-serif;
+    font-weight: bold;
+    color:grey;
+}
+
+
+.head-1{
+	display: inline-block;
+	padding: 10px 0px 10px 10px;
+}
+
+.head-2{
+	display: inline-block;
+	padding: 10px 0px 10px 60px;
+}
+
+
+.lines-1{
+	margin-top: 0px;
+	margin-bottom: 5px;
+	border: 0.5px solid #ccc;
+}
+
+.posted-question, .number-post{
+
+	font-size: 23px;
+	color:#63BD64;
+	font-weight: bold;
+	font-family: sans-serif;
+	cursor: pointer;
+
+}
+
+.vote-counting{
+	cursor: pointer;
+	font-family: sans-serif;
+}
+
+.posted-question-1, .number-post-1{
+	font-size: 23px;
+	color:grey;
+	font-weight: bold;
+	font-family: sans-serif;
+    cursor: pointer;
+}
+
+.question-pik{
+	vertical-align: middle;
+	border-radius: 50%;
+	width:5%;
+	height: 5%;
+}
+
+.summary{
+	padding-left: 10px;
+	vertical-align: middle;
+	display: inline-block;
+	color: grey;
+}
+
+.person{
+	font-size:16px;
+	font-family: sans-serif;
+	font-weight: bold;
+}
+
+.person-1{
+	font-size:14px;
+	font-family: sans-serif;
+	font-weight: bold;
+}
+
+
+.prefix{
+	font-size: 14px;
+}
+
+.questions-column{
+	margin: 15px 0px;
+	font-size: 20px;
+	font-weight: bolder;
+
+}
+
+.comment-column{
+	margin: 5px 0px 15px 10px;
+	font-size: 15px;
+	font-weight: bolder;
+}
+
+.upvote{
+	color: #63BD64;
+    font-size:15px;
+    font-weight: bold;
+
+}
+
+.downvote{
+	font-weight: bold;
+	color: red;
+	font-size: 15px;
+}
+
+.downvote-1{
+	padding-left: 20px;
+}
+
+.posted-sum{
+	padding-left: 10px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+
+}
+
+.cloaking-content{
+	display: none;
+}
+
+.your-comments{
+	display: block;
+	color: grey;
+	font-size:15px;
+	font-family: sans-serif;
+	font-weight: bold;
+	margin: 10px 0px;
+}
+
+.comments-list{
+	border-left: 1px solid #ccc;
+}
+
+.question-pik-1{
+	vertical-align: middle;
+	border-radius: 50%;
+	width:5%;
+	height: 5%;
+	margin-left: 10px;
+}

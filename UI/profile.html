@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Questioner | Profile</title>
+	<link rel="stylesheet" type="text/css" href="css/main-page-design.css">
+    <link rel="stylesheet" type="text/css" href="css/profile-design.css">
+    <script type="text/javascript">
+    	function hidecontent(){
+    		document.getElementById('content').style.cssText='display:none;';
+    		document.getElementById('hiden').style.cssText='display:block;';
+    		document.getElementById('posted').style.cssText='color:grey;';
+    		document.getElementById('commented-a').style.cssText='color:#63BD64;';
+    		document.getElementById('commented-b').style.cssText='color:#63BD64;';
+    		document.getElementById('post').style.cssText='color:grey';
+    	}
+
+        function reversing(){
+        	document.getElementById('content').style.cssText='display:block;';
+    		document.getElementById('hiden').style.cssText='display:none;';
+    		document.getElementById('posted').style.cssText='color:#63BD64;';
+    		document.getElementById('commented-a').style.cssText='color:grey;';
+    		document.getElementById('commented-b').style.cssText='color:grey;';
+    		document.getElementById('post').style.cssText='color:#63BD64';
+        }
+
+    </script>
+</head>
+<body>
+<div class="main1">	
+<header>
+	<div  class="menu" >
+ 	 <ul>
+ 		<li class="icon">Q</li>
+ 		<li class="icon1"><a href="index.html"><b>Questioner</b></a></li>
+ 		<li class="menu1"><a href="index.html">Home</a></li>
+ 		<li class="menu1"><a href="main-page.html">Meetup-Themes</a></li>
+ 		<li class="menu1"><a href="#">About</a></li>
+ 		<li class="menu1"><a href="#">Help</a></li>
+
+ 	 </ul>
+
+ </div>
+
+ <div class="user-summary">
+    <a href="" class="notif-icon"><img src="img/notification.png" class="notification"> <span class="pop">3</span></a>
+
+    <div class="dropdown"> <img src="img/clet.jpg" class="profile-picture"> <span class="unicode-arrow"> &#9660;</span> 
+
+      <div class="drop-content">
+      	<ul>
+      		<li class="on-now"><label><a href="#"  class="anchor">Your Profile</a></label></li>
+      		<li class="on-now"><a href="#" >Create a Meetup</a></li>
+      		<li class="on-now"><a href="#">Delete Meetups</a></li>
+      		<li class="on-now"><a href="#">Questions You Posted <span>5</span></a></li>
+      		<li class="on-now"><a href="#">Questions You Commented On <span>5</span></a></li>
+      		<hr>
+      		<li class="on-now"><a href="index.html">Sign Out</a></li>
+      	</ul>
+      </div>
+    </div>
+ </div>	
+	</header>
+
+
+<div class="posted-summary">
+ <span class="posted-question head-1" id="posted" onclick="reversing();">Posted questions&nbsp;.&nbsp;</span>
+ <span class="number-post" id="post" onclick="reversing();">3</span>
+ <span class="posted-question-1 head-2"  onclick="hidecontent();" id="commented-a">Questions Commented On&nbsp;.&nbsp;</span>
+ <span class="number-post-1" id="commented-b" onclick="hidecontent();" >2</span>
+ 
+
+ <hr class="lines-1">
+
+<div class="target" id="content">
+<div class="posted-sum">
+<div class="personal-description">
+		<img class="question-pik" src="img/clet.jpg" alt="User Picture">
+		<div class="summary">
+			<span class="person">Clet Mwunguzi</span> &nbsp; &nbsp; <span class="person"> . &nbsp;Dec 6</span>
+		</div>   
+	</div>
+  <p class="questions-column">Why are we not shifting to EV as quickly as possible?</p>
+
+  <div class="vote-counting">
+  	<span class="upvote">&#8679</span>
+  	<span class="upvote">Upvote . </span>
+  	<span class="upvote">8</span>
+  	<span class="downvote downvote-1">&#8681</span>
+  	<span class="downvote">Downvote . </span>
+  	<span class="downvote">3</span>
+
+  	<span class="comment-num">&#9729; Comments . </span>
+  	<span class="num">2</span>
+  </div>
+
+</div>
+
+<hr class="lines-1">
+
+
+<div class="posted-sum">
+<div class="personal-description">
+		<img class="question-pik" src="img/clet.jpg" alt="User Picture">
+		<div class="summary">
+			<span class="person">Clet Mwunguzi</span> &nbsp; &nbsp; <span class="person"> . &nbsp;Dec 6</span>
+	
+		</div>   
+	</div>
+  <p class="questions-column">What are the disadvantage of using EV over fuel cars?</p>
+
+  <div class="vote-counting">
+  	<span class="upvote">&#8679</span>
+  	<span class="upvote">Upvote . </span>
+  	<span class="upvote">5</span>
+  	<span class="downvote downvote-1">&#8681</span>
+  	<span class="downvote">Downvote . </span>
+  	<span class="downvote">1</span>
+  	<span class="comment-num">&#9729; Comments . </span>
+  	<span class="num">2</span>
+  </div>
+
+</div>
+
+<hr class="lines-1">
+
+<div class="posted-sum">
+<div class="personal-description">
+		<img class="question-pik" src="img/clet.jpg" alt="User Picture">
+		<div class="summary">
+			<span class="person">Clet Mwunguzi</span> &nbsp; &nbsp; <span class="person"> . &nbsp;Dec 6</span>
+	
+		</div>   
+	</div>
+  <p class="questions-column">What are the disadvantage of using EV over fuel cars?</p>
+
+  <div class="vote-counting">
+  	<span class="upvote">&#8679</span>
+  	<span class="upvote">Upvote . </span>
+  	<span class="upvote">4</span>
+  	<span class="downvote downvote-1">&#8681</span>
+  	<span class="downvote">Downvote . </span>
+  	<span class="downvote">1</span>
+  	<span class="comment-num">&#9729; Comments . </span>
+  	<span class="num">2</span>
+  </div>
+
+</div>
+
+</div>
+
+<div class="cloaking-content" id="hiden">
+<div class="posted-sum">
+<div class="personal-description">
+		<img class="question-pik" src="img/blank.png" alt="User Picture">
+		<div class="summary">
+			<span class="person">Peter Chan</span> &nbsp; &nbsp; <span class="person"> . &nbsp;Dec 6</span>
+		</div>   
+	</div>
+  <p class="questions-column">Why are we not shifting to EV as quickly as possible?</p>
+
+  <div class="vote-counting">
+  	<span class="upvote">&#8679</span>
+  	<span class="upvote">Upvote . </span>
+  	<span class="upvote">8</span>
+  	<span class="downvote downvote-1">&#8681</span>
+  	<span class="downvote">Downvote . </span>
+  	<span class="downvote">3</span>
+
+  	<span class="comment-num">&#9729; Comments . </span>
+  	<span class="num">4</span>
+  </div>
+
+  <span class="your-comments">Your Comments</span>
+  <div class="comments-list">
+   <img class="question-pik-1" src="img/clet.jpg" alt="User Picture">
+   <div class="summary">
+			<span class="person-1">Clet Mwunguzi</span> &nbsp; &nbsp; <span class="person-1"> . &nbsp;Dec 6</span>
+    </div> 
+    <p class="comment-column">Peter is right. maybe it's because there not many experts in the field.</p>
+
+    <img class="question-pik-1" src="img/clet.jpg" alt="User Picture">
+   <div class="summary">
+			<span class="person-1">Clet Mwunguzi</span> &nbsp; &nbsp; <span class="person-1"> . &nbsp;Dec 6</span>
+    </div> 
+    <p class="comment-column">Peter is right. maybe it's because there not many experts in the field.</p>
+  </div>
+
+
+</div>
+
+<hr class="lines-1">
+
+<div class="posted-sum">
+<div class="personal-description">
+		<img class="question-pik" src="img/blank.png" alt="User Picture">
+		<div class="summary">
+			<span class="person">Ching Chang</span> &nbsp; &nbsp; <span class="person"> . &nbsp;Dec 6</span>
+		</div>   
+	</div>
+  <p class="questions-column">Is the future of cars EV?</p>
+
+  <div class="vote-counting">
+  	<span class="upvote">&#8679</span>
+  	<span class="upvote">Upvote . </span>
+  	<span class="upvote">8</span>
+  	<span class="downvote downvote-1">&#8681</span>
+  	<span class="downvote">Downvote . </span>
+  	<span class="downvote">3</span>
+
+  	<span class="comment-num">&#9729; Comments . </span>
+  	<span class="num">4</span>
+  </div>
+
+  <span class="your-comments">Your Comments</span>
+  <div class="comments-list">
+   <img class="question-pik-1" src="img/clet.jpg" alt="User Picture">
+   <div class="summary">
+			<span class="person-1">Clet Mwunguzi</span> &nbsp; &nbsp; <span class="person-1"> . &nbsp;Dec 6</span>
+    </div> 
+    <p class="comment-column">Maybe, it could be the hybrid of both EV and fuel. </p>
+
+  </div>
+
+
+</div>
+</div>
+
+
+</div>
+
+</div>
+</body>
+</html>
