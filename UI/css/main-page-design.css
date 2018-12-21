@@ -14,6 +14,24 @@ header{
 	z-index: 3;
 }
 
+.blankspace{
+	content: " ";
+	display: block;
+	margin-top: 10%;
+}
+
+
+.titles{
+	display: block;
+	padding-left: 31%;
+	padding-top: 15px;
+	font-size: 25px;
+	font-weight: bold;
+	color: #63BD64;
+	font-family:sans-serif;
+	height: 5%;
+}
+
 .menu{
 
 	float: left;
