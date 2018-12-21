@@ -2,7 +2,7 @@
 margin-top: 10%;	
 padding: 1%;
 margin-right: 13.5%;
-z-index: 1
+z-index: 1;
 
 }
 
@@ -62,8 +62,10 @@ z-index: 1
 .heading{
 	text-align: center;
 	font-family: sans-serif;
-	font-size: 20px;
+	font-size: 25px;
 	font-weight: bold;
+	color: #63BD64;
+	padding-bottom: 10px;
 }
 
 
@@ -110,7 +112,7 @@ z-index: 1
 }
 
 
-label{
+label.one{
 	display: inline-block;
 	width: 20%;
 	text-align: right;
