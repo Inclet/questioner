@@ -11,7 +11,7 @@ header{
 	width: 100%;
 	display: inline-block;
 	background-color: #63BD64;
-	z-index: 
+	z-index: 3;
 }
 
 .menu{
@@ -265,7 +265,7 @@ z-index: 1
 	font-size: 15px;
 	color: red;
 	position: absolute;
-	top:71%;
+	top:74%;
 	left: 16%;
 
 }
@@ -296,6 +296,9 @@ z-index: 1
 }
 
 a.view:hover{
+	cursor: pointer;
     text-decoration:underline;
 
 }
+
+

@@ -1,0 +1,47 @@
+.adding-removing{
+margin-top: 10%;	
+padding: 1%;
+margin-right: 13.5%;
+z-index: 1
+
+}
+
+.adding-removing:after{
+   content: " ";
+   display: block;
+   clear: both;
+}
+
+
+.create, .delete{
+	cursor: pointer;
+	border-radius: 4px;
+	padding: 10px;
+	background-color: white;
+	float: right;
+	display: inline-block;
+	color: #63BD64;
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+
+.delete{
+	margin-left: 10px;
+	color: red;
+}
+
+.view-1{
+	display: none;
+	font-weight: bold;
+	padding: 5px  10px;
+	text-decoration: none;
+	color: white;
+	border-radius: 4px;
+	position: absolute;
+	left: 92%;
+	top: 63%;
+	width:3.5%;
+	height: 22%;
+}
