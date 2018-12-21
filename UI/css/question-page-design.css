@@ -208,3 +208,21 @@ hr.one{
 	border-radius: 8px;
 	padding-left: 10px;
 }
+
+
+.comment-num{
+	padding-left: 30px;
+	vertical-align: middle;
+	font-size: 15px;
+	font-family: sans-serif;
+    font-weight: bold;
+    color: grey;
+}
+
+.num{
+	vertical-align: middle;
+	font-size: 15px;
+	font-family: sans-serif;
+    font-weight: bold;
+    color:grey;
+}
