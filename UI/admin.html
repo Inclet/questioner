@@ -4,6 +4,50 @@
 	<title>Questioner | Admin</title>
 	<link rel="stylesheet" type="text/css" href="css/main-page-design.css">
 	<link rel="stylesheet" type="text/css" href="css/admin-design.css">
+	<script type="text/javascript">
+		function clearing(){
+
+			view_clear = document.getElementsByClassName('view');
+			for(i=0; i < view_clear.length; i++ ){
+				view_clear[i].style.display='none';
+			}
+
+			const view1 = document.getElementsByClassName('view-1');
+
+			for(i=0; i < view1.length; i++ ){
+				view1[i].style.display='inline-block';
+			}
+			
+		}
+
+	    function disappear(){
+	 	       document.getElementById('meetup-description').style.cssText='display:none;';
+	    }	
+
+        function adding(){
+        	 const cleaning = document.getElementsByClassName('meetup-description');
+        	 for (var i = 0; i < cleaning.length; i++) {
+        	 	cleaning[i].style.display='none';
+        	 }
+
+        	 const clears = document.getElementById('adding-meetup');
+        	 clears.style.display='block';
+        }
+
+        function backing(){
+        	
+            document.getElementById('adding-meetup').style.cssText='display:none;';
+
+        	const cleaning = document.getElementsByClassName('meetup-description');
+        	 for (var i = 0; i < cleaning.length; i++) {
+        	 	cleaning[i].style.display='block';
+        	 }
+
+
+
+        	
+        }
+	</script>
 </head>
 <body>
 	<div class="main1">
@@ -43,11 +87,11 @@
 	</header>
 
 <div class="adding-removing">
-<span class="delete">&#10006; Delete a Meetup</span>	
-<span class="create">&#10010; Create a Meetup</span>
+<span class="delete" onclick="clearing();">&#10006; Delete a Meetup</span>	
+<span class="create" onclick="adding();">&#10010; Create a Meetup</span>
 </div>
 
-<div class="meetup-description">
+<div class="meetup-description" id="meetup-description">
 	<div class="host-pic"><img class="host-img" src="img/blank.png"> 
 		<div class="organizer">Organizer</div>
 	</div>
@@ -66,13 +110,13 @@
 	 </div>
    <div class="posted-questions">10 Questions Submited</div>
 
-   	<a  class="view" href="#">View</a>
-   	 <img class="view-1" src="img/delete-icon.png">
+   	<a  class="view" id="view" href="#">View</a>
+   	 <img class="view-1" id="view-1" onclick="disappear();" src="img/delete-icon.png">
  
 
 </div>
 
-<div class="meetup-description">
+<div class="meetup-description" id="meetup-description">
 	<div class="host-pic"><img class="host-img" src="img/blank.png"> 
 		<div class="organizer">Organizer</div>
 	</div>
@@ -91,13 +135,13 @@
 	 </div>
    <div class="posted-questions">10 Questions Submited</div>
 
-   	<a  class="view" href="#">View</a>
-    <img class="view-1" src="img/delete-icon.png">
+   	<a  class="view" id="view" href="#">View</a>
+    <img class="view-1" id="view-1" onclick="disappear();" src="img/delete-icon.png">
 
 </div>
 
 
-<div class="meetup-description">
+<div class="meetup-description" id="meetup-description" >
 	<div class="host-pic"><img class="host-img" src="img/blank.png"> 
 		<div class="organizer">Organizer</div>
 	</div>
@@ -116,14 +160,14 @@
 	 </div>
    <div class="posted-questions">10 Questions Submited</div>
 
-   	<a  class="view" href="#">View</a>
-   	 <img class="view-1" src="img/delete-icon.png">
+   	<a  class="view" id="view" href="#">View</a>
+   	 <img class="view-1" id="view-1" onclick="disappear();" src="img/delete-icon.png">
  
 
 </div>
 
 
-<div class="meetup-description">
+<div class="meetup-description"  id="meetup-description">
 	<div class="host-pic"><img class="host-img" src="img/blank.png"> 
 		<div class="organizer">Organizer</div>
 	</div>
@@ -142,10 +186,36 @@
 	 </div>
    <div class="posted-questions">10 Questions Submited</div>
 
-   	<a  class="view" href="#">View</a>
-   	 <img class="view-1" src="img/delete-icon.png">
+   	<a  class="view" id="view" href="#">View</a>
+   	 <img class="view-1" id="view-1" onclick="disappear();" src="img/delete-icon.png">
  
 
+</div>
+
+<div class="adding-meetup" id="adding-meetup">
+	<div class="heading">Create a New Meetup</div>
+    <div class="description">
+
+    <div class="aligning">	
+     <div class="separating">
+     <label for="theme-field">Theme</label>
+     <input type="text" name="theme-text" class="theme-field" id="theme-field" placeholder="Meetup Theme...">
+     </div>
+
+     <div class="separating">
+     <label for="short-description" class="short-desc">Short Description</label>
+     <textarea placeholder="Short Description of the Meetup" cols="34" rows="6" class="short-description" id="short-description"></textarea>
+     </div>
+
+     <div  class="separating">
+     <label for="speaker-field">Speaker</label>
+     <input type="text" name="speaker-text" class="speaker-field" id="speaker-field" placeholder="Speaker Name...">
+     </div>
+ </div>
+
+     <input type="button" name="Create" class="create-button" id="create-button" value="Create" onclick="backing();">
+
+    </div>
 </div>
 
 

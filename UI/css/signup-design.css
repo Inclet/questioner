@@ -2,7 +2,7 @@
 .user_info{
     margin:auto;
     background-color: white;
-    width:37%;
+    width:40%;
     height: 500px;
     opacity:0.9;
     border-radius: 8px;
@@ -31,11 +31,9 @@ input{
 
 }
 
-form{
-	padding: 8px;
-	margin-top: 10px;
-	margin-right: 125px;
-
+.forms{
+	width:70%;
+	text-align: center;
 }
 
 .lab{
