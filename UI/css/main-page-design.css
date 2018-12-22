@@ -322,3 +322,57 @@ a.view:hover{
 }
 
 
+.menu-pic{
+	display: none;
+	width: 10%;
+	margin-top: 2%;
+}
+
+.hidden-menu{
+    
+    display: none;
+    background-color: white;
+	margin-top: -2%;
+	width: 100%;
+	z-index: 1;
+	float: left;
+	border-radius:4px;
+
+}
+
+
+.hidden-menu li{
+	display: block;
+}
+
+
+@media screen and (max-width: 560px){
+	 .login-part{
+		display:none;
+	}
+
+
+	.menu ul{
+		padding-left: 0;
+	}
+
+
+    .menu ul .menu1{
+		display: none;
+	}
+
+	.menu-pic{
+		display: inline-block;
+		float: right;
+	}
+   .hovering:hover .hidden-menu{
+           display: block;
+   }
+
+   .menu1 a{
+   	color: #63BD64;
+   }
+}
+
+
+
