@@ -1,0 +1,39 @@
+{
+  "name": "questioner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "joi": "^13.1.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^5.11.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "nodemon": "^1.18.9"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "babel": "babel --preset es2015 ./index.js -d ./build",
+    "start": "node index.js",
+    "pin": "nodemon --exec babel-node --presets env index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Inclet/questioner.git"
+  },
+  "keywords": [
+    "quest"
+  ],
+  "author": "Inclet",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Inclet/questioner/issues"
+  },
+  "homepage": "https://github.com/Inclet/questioner#readme"
+}
