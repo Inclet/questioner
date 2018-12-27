@@ -32,6 +32,29 @@ class meetup{
 	}
 
 
+	static fetchMeetup(req, res){
+		const meetupId = meetupRecords.find(c => c.id === parseInt(req.params.id));
+		if(!meetupId)
+			return res.status(404).send({
+				status:404,
+				error : 'No such meetup Can Be Found'
+			});
+
+		const {id, topic, location, happeningOn, tags} = meetupId;
+
+		res.send({
+			status:201,
+			data : [{
+				id,
+				topic,
+				location,
+				happeningOn,
+				tags
+			}]
+		})
+	}
+
+
 
 }
 
