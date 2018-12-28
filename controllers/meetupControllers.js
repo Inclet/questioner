@@ -24,6 +24,7 @@ class meetup{
 			location,
 			happeningOn : moment(happeningOn).format('LL'),
 			tags : tags.split(' ') 
+
 		}
 
 		meetupRecords.push(newMeetup);
