@@ -52,7 +52,7 @@ class meetup{
 				topic,
 				location,
 				happeningOn,
-				tags
+				tags : tags.split(' ')
 			}]
 		})
 	}
