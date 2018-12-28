@@ -22,11 +22,13 @@ class meetup{
 			id: parseInt(meetupRecords.length + 1 ),
 			topic,
 			location,
-			happeningOn: moment(happeningOn).format('LL'),
-			tags
+			happeningOn : moment(happeningOn).format('LL'),
+			tags : tags.split(' ') 
+
 		}
 
 		meetupRecords.push(newMeetup);
+		
 		return res.status(201).send({
 			status:201,
 			data:[
@@ -53,7 +55,7 @@ class meetup{
 				topic,
 				location,
 				happeningOn,
-				tags : tags.split(' ')
+				tags
 			}]
 		})
 	}
@@ -65,6 +67,32 @@ class meetup{
 			data : meetupRecords
 		})
 	}
+
+
+	static getUpcomingMeetups(req, res){
+
+		var recording = [];
+
+
+
+        for(var i = 0; i < meetupRecords.length; i++){
+         if(moment(meetupRecords[i].happeningOn).format('LL') > moment().format('LL'))
+         	  recording.push(meetupRecords[i]);
+        }
+
+        if(recording.length > 0)
+        	return res.status(201).send({
+        		status : 201,
+        		data : [
+                   recording
+        		]
+        	});
+        else
+        	return res.status(404).send({
+        		status: 404,
+        		error : "No Upcoming meetup..."
+        	});
+    }
 
 
 
