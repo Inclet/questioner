@@ -1,5 +1,6 @@
 import meetupRecords from "../data/meetupRecords";
 import Joi from 'joi';
+import moment from 'moment';
 
 
 class meetup{
@@ -21,7 +22,7 @@ class meetup{
 			id: parseInt(meetupRecords.length + 1 ),
 			topic,
 			location,
-			happeningOn,
+			happeningOn: moment(happeningOn).format('LL'),
 			tags
 		}
 
