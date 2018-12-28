@@ -13,7 +13,10 @@ class meetup{
 
 		const { error } = validateRecords(req.body);
 		if(error)
-			return res.status(400).send(error.details[0].message);
+			return res.status(400).send({
+                status:400,
+				error
+			});
 
 		const newMeetup = {
 			id: parseInt(meetupRecords.length + 1 ),
@@ -56,6 +59,14 @@ class meetup{
 	}
 
 
+	static getAllMeetups(req, res){
+		return res.send({
+			status : 201,
+			data : meetupRecords
+		})
+	}
+
+
 
 }
 
@@ -63,8 +74,8 @@ function validateRecords(records){
 	const schema = {
      	   topic : Joi.string().min(4).required(),
      	   location: Joi.string().min(1).required(),
-     	   happeningOn: Joi.string().min(1).required(),
-     	   tags: Joi.string().min(1).required()
+     	   happeningOn : Joi.string().min(1).required(),
+     	   tags : Joi.string().min(1).required()
           };
 
      return Joi.validate(records, schema);
