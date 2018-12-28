@@ -1,5 +1,6 @@
 import meetupRecords from "../data/meetupRecords";
 import Joi from 'joi';
+import moment from 'moment';
 
 
 class meetup{
@@ -18,7 +19,7 @@ class meetup{
 			id: parseInt(meetupRecords.length + 1 ),
 			topic,
 			location,
-			happeningOn,
+			happeningOn: moment(happeningOn).format('LL'),
 			tags
 		}
 
@@ -61,7 +62,9 @@ class meetup{
 function validateRecords(records){
 	const schema = {
      	   topic : Joi.string().min(4).required(),
-     	   location: Joi.string().min(1).required() 
+     	   location: Joi.string().min(1).required(),
+     	   happeningOn: Joi.string().min(1).required(),
+     	   tags: Joi.string().min(1).required()
           };
 
      return Joi.validate(records, schema);

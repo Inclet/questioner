@@ -7,7 +7,8 @@
     "babel-core": "^6.26.3",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "joi": "^13.1.0"
+    "joi": "^13.1.0",
+    "moment": "^2.23.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
