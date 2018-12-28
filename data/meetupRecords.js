@@ -4,7 +4,7 @@ const meetupRecords = [
 	id : 1,
     topic : "Future Transport",
     location : "Remera",
-    happeningOn : "23/12/2018",
+    happeningOn : "December 28, 2018",
     tags : "#future #transport #create"
 }];
 
