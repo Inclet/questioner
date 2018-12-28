@@ -22,10 +22,11 @@ class meetup{
 			topic,
 			location,
 			happeningOn,
-			tags
+			tags : tags.split(' ')
 		}
 
 		meetupRecords.push(newMeetup);
+		
 		return res.status(201).send({
 			status:201,
 			data:[
