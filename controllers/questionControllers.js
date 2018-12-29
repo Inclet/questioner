@@ -21,12 +21,19 @@ class questions{
      		});
 
      	if(questionToUpdate){
-
+            
             questionToUpdate.votes = questionToUpdate.votes + 1;
-     		return res.status(206).send({
-     			status : 206,
+            const { meetup, title, body, votes } = questionToUpdate;
+
+     		return res.status(201).send({
+     			status : 201,
      			data : [
-                    questionToUpdate
+                    {
+                        meetup,
+                        title,
+                        body,
+                        votes
+                    }
      			]
      		})
      }
