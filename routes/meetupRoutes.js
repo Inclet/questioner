@@ -10,6 +10,7 @@ router.get('/meetups/:id', meetupControllers.fetchMeetup);
 router.get('/meetup/upcoming/', meetupControllers.getUpcomingMeetups);
 router.get('/meetups', meetupControllers.getAllMeetups);
 router.patch('/questions/:id/upvote', questionControllers.upvoteQuestion);
+router.patch('/questions/:id/downvote', questionControllers.downvoteQuestion);
 
 
 export default router;
