@@ -1,4 +1,5 @@
 import meetupRecords from "../data/meetupRecords";
+import meetupQuestions from '../data/meetupQuestions';
 import Joi from 'joi';
 import moment from 'moment';
 
@@ -95,8 +96,36 @@ class meetup{
     }
 
 
+    static upvoteQuestion(req, res){
+
+    	console.log(meetupQuestions);
+
+     	const questionToUpdate = meetupQuestions.find( c => c.id === parseInt(req.params.id));
+     	
+        console.log('aaaaaa....');
+     	if(!questionToUpdate)
+     		return res.status(404).send({
+     			status:404,
+     			error : 'No question with such ID can be found...'
+     		})
+
+     	if(questionToUpdate){
+
+            questionToUpdate.votes = questionToUpdate.votes + 1;
+     		return res.status(201).send({
+     			status : 201,
+     			data : [
+                    questionToUpdate
+     			]
+     		})
+     }
 
 }
+
+
+
+}
+
 
 function validateRecords(records){
 	const schema = {
