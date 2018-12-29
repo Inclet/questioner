@@ -1,5 +1,6 @@
 import meetupRecords from "../data/meetupRecords";
 import meetupQuestions from '../data/meetupQuestions';
+import rsvp from '../data/rsvpMeetups';
 import Joi from 'joi';
 import moment from 'moment';
 
@@ -121,6 +122,45 @@ class meetup{
      }
 
 }
+
+
+     static respondRsvp(req, res){
+             
+             const meetupId = meetupRecords.find(c => c.id === parseInt(req.params.id));
+
+             if(meetupId){
+             	
+            if (req.body.status.toLowerCase() != "yes" && req.body.status.toLowerCase() != "no" && req.body.status.toLowerCase() != "maybe")
+            	return res.status(400).send({
+            		status:400,
+            		error : "Bad Request. value assigned to status is not valid"
+            	})
+             const { topic } = meetupId;
+             const newRsvp = {
+                id : parseInt(rsvp.length) + 1,
+             	meetup : meetupId.id,
+             	topic,
+             	status : req.body.status
+             }
+             rsvp.push(newRsvp);
+
+             return res.status(201).send({
+             	status : 201,
+             	data : [{
+                  meetup : newRsvp.meetup,
+                  topic : newRsvp.topic,
+                  status : newRsvp.status
+             	}
+             	]
+             })
+         }
+
+         if(!meetupId)
+         	return res.status(404).send({
+         		status : 404,
+         		error : 'No such ID can be found'
+         	})
+     }
 
 
 
