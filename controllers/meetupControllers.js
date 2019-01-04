@@ -4,6 +4,8 @@ import rsvp from '../data/rsvpMeetups';
 import Joi from 'joi';
 import moment from 'moment';
 
+moment.suppressDeprecationWarnings = true;
+
 
 class meetup{
 	constructor(){
@@ -17,12 +19,13 @@ class meetup{
 		if(error)
 			return res.status(400).send({
                 status:400,
-				error
+				error: error.details[0].message
 			});
 
 		const newMeetup = {
 			id: parseInt(meetupRecords.length + 1 ),
 			topic,
+			createdOn: moment().format('LL'),
 			location,
 			happeningOn : moment(happeningOn).format('LL'),
 			tags : tags.split(' ') 
@@ -50,8 +53,8 @@ class meetup{
 
 		const {id, topic, location, happeningOn, tags} = meetupId;
 
-		res.send({
-			status:201,
+		res.status(200).send({
+			status:200,
 			data : [{
 				id,
 				topic,
@@ -65,7 +68,7 @@ class meetup{
 
 	static getAllMeetups(req, res){
 		return res.send({
-			status : 201,
+			status : 200,
 			data : meetupRecords
 		})
 	}
@@ -78,16 +81,17 @@ class meetup{
 
 
         for(var i = 0; i < meetupRecords.length; i++){
-         if(moment(meetupRecords[i].happeningOn).format('LL') > moment().format('LL'))
+
+         if(moment(meetupRecords[i].happeningOn).isSameOrAfter(moment().format('LL')))
          	  recording.push(meetupRecords[i]);
         }
 
         if(recording.length > 0)
-        	return res.status(201).send({
-        		status : 201,
-        		data : [
+        	return res.status(200).send({
+        		status : 200,
+        		data : 
                    recording
-        		]
+        		
         	});
         else
         	return res.status(404).send({
@@ -96,39 +100,12 @@ class meetup{
         	});
     }
 
-
-    static upvoteQuestion(req, res){
-
-    	console.log(meetupQuestions);
-
-     	const questionToUpdate = meetupQuestions.find( c => c.id === parseInt(req.params.id));
-     	
-        console.log('aaaaaa....');
-     	if(!questionToUpdate)
-     		return res.status(404).send({
-     			status:404,
-     			error : 'No question with such ID can be found...'
-     		})
-
-     	if(questionToUpdate){
-
-            questionToUpdate.votes = questionToUpdate.votes + 1;
-     		return res.status(201).send({
-     			status : 201,
-     			data : [
-                    questionToUpdate
-     			]
-     		})
-     }
-
-}
-
-
      static respondRsvp(req, res){
              
              const meetupId = meetupRecords.find(c => c.id === parseInt(req.params.id));
 
              if(meetupId){
+             	
              	
             if (req.body.status.toLowerCase() != "yes" && req.body.status.toLowerCase() != "no" && req.body.status.toLowerCase() != "maybe")
             	return res.status(400).send({
@@ -142,6 +119,7 @@ class meetup{
              	topic,
              	status : req.body.status
              }
+
              rsvp.push(newRsvp);
 
              return res.status(201).send({
@@ -170,9 +148,9 @@ class meetup{
 function validateRecords(records){
 	const schema = {
      	   topic : Joi.string().min(4).required(),
-     	   location: Joi.string().min(1).required(),
-     	   happeningOn : Joi.string().min(1).required(),
-     	   tags : Joi.string().min(1).required()
+     	   location: Joi.string().min(2).required(),
+     	   happeningOn : Joi.string().min(2).required(),
+     	   tags : Joi.string().min(2).required()
           };
 
      return Joi.validate(records, schema);

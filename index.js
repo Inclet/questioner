@@ -14,7 +14,8 @@ app.use(meetuproutes);
 const port = 3000;
 
 app.use('/api/v1/users', meetuproutes);
-app.get('/cj', (req, res) => res.send('Hello World!'));
+
 
 app.listen(port, () => console.log(`Example listening on port ${port}!`));
 
+export default app;
