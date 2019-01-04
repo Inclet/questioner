@@ -357,6 +357,118 @@
  });
 
 
+ describe('Creating a question for a specific meetup', ()=>{
+
+ 	it('/POST /questions', (done)=>{
+
+ 		const record = {
+ 			title : "Future Economics",
+ 			body : "How Will It Look like"
+ 		}
+
+ 		chai.request(app)
+ 		    .post('/questions')
+ 		    .send(record)
+ 		    .end((err, res)=>{
+            
+                res.body.should.be.a('object');
+                res.body.should.have.property('status');
+                res.body.should.have.property('data');
+                res.body.data.should.be.a('array');
+                res.body.data[0].should.have.property('title').eql('Future Economics');
+                res.body.data[0].should.have.property('body').eql('How Will It Look like');
+                res.body.data[0].should.have.property('meetup').eql(1);
+                res.body.data[0].should.have.property('user').eql(1);
+
+                done();
+ 		    })
+
+ 	})
+
+
+ 	it('can not post a question when title is not defined', (done)=>{
+
+ 		const record = {
+ 			body : "How Will It Look like"
+ 		}
+
+ 		chai.request(app)
+ 		    .post('/questions')
+ 		    .send(record)
+ 		    .end((err, res)=>{
+            
+                res.body.should.be.a('object');
+                res.body.should.have.property('status').eql(400);
+                
+                done();
+ 		    })
+
+ 	});
+
+
+ 	it('can not post a question when title is not a string or at minimum 4 characters', (done)=>{
+
+ 		const record = {
+ 			title : 1,
+ 			body : "How Will It Look like"
+ 		}
+
+ 		chai.request(app)
+ 		    .post('/questions')
+ 		    .send(record)
+ 		    .end((err, res)=>{
+            
+                res.body.should.be.a('object');
+                res.body.should.have.property('status').eql(400);
+                
+                done();
+ 		    })
+
+ 	});
+
+
+ 	it('can not post a question when body is not defined', (done)=>{
+
+ 		const record = {
+ 			title : "Future Economics"
+ 		}
+
+ 		chai.request(app)
+ 		    .post('/questions')
+ 		    .send(record)
+ 		    .end((err, res)=>{
+            
+                res.body.should.be.a('object');
+                res.body.should.have.property('status').eql(400);
+                
+                done();
+ 		    })
+
+ 	});
+
+   it('can not post a question when body is not a string or at minimum 4 characters', (done)=>{
+
+ 		const record = {
+ 			title : "Future Economics",
+ 			body : 2
+ 		}
+
+ 		chai.request(app)
+ 		    .post('/questions')
+ 		    .send(record)
+ 		    .end((err, res)=>{
+            
+                res.body.should.be.a('object');
+                res.body.should.have.property('status').eql(400);
+                
+                done();
+ 		    })
+
+ 	});
+
+ })
+
+
 
 
 
