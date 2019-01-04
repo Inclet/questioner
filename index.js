@@ -11,7 +11,7 @@ app.use(bodyparser.urlencoded({
 app.use(meetuproutes);
 
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use('/api/v1/users', meetuproutes);
 

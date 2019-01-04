@@ -26,7 +26,7 @@
   "scripts": {
     "test": "mocha test/testIndex --compilers js:babel-core/register --timeout 1000  ",
     "babel": "babel --preset es2015 ./index.js -d ./build",
-    "start": "node index.js",
+    "start": "node --require babel-register index.js",
     "pin": "nodemon --exec babel-node --presets env index"
   },
   "repository": {
