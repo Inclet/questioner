@@ -72,8 +72,58 @@ class questions{
         }
 
 
+        static createQuestion(req, res){
+
+        
+            const { error } = validateRecords(req.body);
+            if(error)
+              return res.status(400).send({
+                status:400,
+                error: error.details[0].message
+            });
+
+            const {title, body} = req.body
+
+            const newQuestion = {
+                   id : parseInt(meetupQuestions.length +1),
+                   createdOn : moment().format('LL'),
+                   createdBy : 1,
+                   meetup : 1,
+                   title,
+                   body,
+                   votes : 0
+
+            }
+
+
+            meetupQuestions.push(newQuestion);
+
+
+            return res.status(201).send({
+                status : 201,
+                data : [{
+                    user : newQuestion.createdBy,
+                    meetup : newQuestion.meetup,
+                    title,
+                    body
+                }]
+            })
+
+        }
+
+
+
 
 }
 
+function validateRecords(records){
+    const schema = {
+           title : Joi.string().min(4).required(),
+           body: Joi.string().min(4).required(),
+          };
+
+     return Joi.validate(records, schema);
+
+     }
 
 export default questions;
