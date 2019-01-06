@@ -10,7 +10,7 @@
    it('/GET /meetups', (done) =>{
 
     chai.request(app)
-        .get('/meetups')
+        .get('/api/v1/meetups')
         .end((err, res)=>{
            res.body.should.be.a('object');
            res.body.should.have.property('status').eql(200);
@@ -34,7 +34,7 @@
    it('/GET /meetups/<meetup-id>', (done)=>{
 
             chai.request(app)
-               .get('/meetups/1')
+               .get('/api/v1/meetups/1')
                .end((err, res)=>{
                	res.body.should.be.a('object');
                 res.body.should.have.property('status').eql(200);
@@ -63,7 +63,7 @@
  		}
 
  		chai.request(app)
- 		    .post('/meetups')
+ 		    .post('/api/v1/meetups')
  		    .send(record)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
@@ -89,7 +89,7 @@
  		}
 
  		chai.request(app)
- 		    .post('/meetups')
+ 		    .post('/api/v1/meetups')
  		    .send(record)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
@@ -108,7 +108,7 @@
  		}
 
  		chai.request(app)
- 		    .post('/meetups')
+ 		    .post('/api/v1/meetups')
  		    .send(record)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
@@ -127,7 +127,7 @@
  		}
 
  		chai.request(app)
- 		    .post('/meetups')
+ 		    .post('/api/v1/meetups')
  		    .send(record)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
@@ -146,7 +146,7 @@
  		}
 
  		chai.request(app)
- 		    .post('/meetups')
+ 		    .post('/api/v1/meetups')
  		    .send(record)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
@@ -164,7 +164,7 @@
  		}
 
  		chai.request(app)
- 		    .post('/meetups')
+ 		    .post('/api/v1/meetups')
  		    .send(record)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
@@ -184,7 +184,7 @@
  		}
 
  		chai.request(app)
- 		    .post('/meetups')
+ 		    .post('/api/v1/meetups')
  		    .send(record)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
@@ -204,7 +204,7 @@
  		}
 
  		chai.request(app)
- 		    .post('/meetups')
+ 		    .post('/api/v1/meetups')
  		    .send(record)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
@@ -223,7 +223,7 @@
  		}
 
  		chai.request(app)
- 		    .post('/meetups')
+ 		    .post('/api/v1/meetups')
  		    .send(record)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
@@ -247,7 +247,7 @@
  		}
 
         chai.request(app)
-             .get('/meetup/upcoming')
+             .get('/api/v1/meetup/upcoming')
              .end((err, res)=>{
 
              	res.body.should.be.a('object');
@@ -278,7 +278,7 @@
  		
 
  		chai.request(app)
- 		    .patch('/questions/1/upvote')
+ 		    .patch('/api/v1/questions/1/upvote')
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
                 res.body.should.have.property('status').eql(201);
@@ -299,7 +299,7 @@
  	it('/PATCH /questions/1/downvote', (done)=>{
           
           chai.request(app)
- 		    .patch('/questions/1/downvote')
+ 		    .patch('/api/v1/questions/1/downvote')
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
                 res.body.should.have.property('status').eql(201);
@@ -323,7 +323,7 @@
  		  }
           
           chai.request(app)
- 		    .post('/meetups/1/rsvps')
+ 		    .post('/api/v1/meetups/1/rsvps')
  		    .send(record)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
@@ -344,7 +344,7 @@
  		  }
           
           chai.request(app)
- 		    .post('/meetups/1/rsvps')
+ 		    .post('/api/v1/meetups/1/rsvps')
  		    .send(record)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
@@ -367,7 +367,7 @@
  		}
 
  		chai.request(app)
- 		    .post('/questions')
+ 		    .post('/api/v1/questions')
  		    .send(record)
  		    .end((err, res)=>{
             
@@ -393,7 +393,7 @@
  		}
 
  		chai.request(app)
- 		    .post('/questions')
+ 		    .post('/api/v1/questions')
  		    .send(record)
  		    .end((err, res)=>{
             
@@ -414,7 +414,7 @@
  		}
 
  		chai.request(app)
- 		    .post('/questions')
+ 		    .post('/api/v1/questions')
  		    .send(record)
  		    .end((err, res)=>{
             
@@ -434,7 +434,7 @@
  		}
 
  		chai.request(app)
- 		    .post('/questions')
+ 		    .post('/api/v1/questions')
  		    .send(record)
  		    .end((err, res)=>{
             
@@ -454,7 +454,7 @@
  		}
 
  		chai.request(app)
- 		    .post('/questions')
+ 		    .post('/api/v1/questions')
  		    .send(record)
  		    .end((err, res)=>{
             
