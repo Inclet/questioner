@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "10.5.0"
+  },
   "dependencies": {
     "babel-core": "^6.26.3",
     "body-parser": "^1.18.3",
