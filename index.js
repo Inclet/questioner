@@ -9,10 +9,13 @@ app.use(bodyparser.urlencoded({
 	extended: false
 }))
 
+
 const port = process.env.PORT || 3000;
 
 
+
 app.use(meetuproutes);
+
 
 app.use('/', (req,res) =>{
 	res.send('Welcome to Questioner APIs');
