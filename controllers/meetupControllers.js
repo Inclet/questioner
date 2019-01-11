@@ -8,16 +8,13 @@ moment.suppressDeprecationWarnings = true;
 
 
 class meetup{
-	constructor(){
-		
-	}
-
+	
 	static create(req, res){
 		const { topic, location, happeningOn, tags } = req.body;
 
 		const { error } = validateRecords(req.body);
 		if(error)
-			return res.status(400).send({
+		     return res.status(400).send({
                 status:400,
 				error: error.details[0].message
 			});
