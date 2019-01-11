@@ -31,9 +31,31 @@ input{
 
 }
 
-.forms{
-	width:70%;
-	text-align: center;
+.menu-pic{
+	display: none;
+	width: 10%;
+	margin-top: 4%;
+}
+
+.hidden-menu{
+    
+    display: none;
+    background-color: white;
+	margin-top: -2%;
+	width: 100%;
+	z-index: 1;
+	float: left;
+	border-radius:4px;
+
+}
+
+
+.hidden-menu li{
+	display: block;
+
+}
+form{
+	margin-right: 28%;
 }
 
 .lab{
@@ -54,15 +76,75 @@ input{
 
 .signup_link{
 margin-top:25px; 	
-margin-left: 156px;
+margin-left: 35%;
 border:2px solid #64BD63;
 border-radius: 4px;
 padding:10px;
-width: 33%;
+width: 30%;
 }
 
 
 .main{
 	margin-left: 50px;
 	margin-right: 50px;
+}
+
+
+@media screen and (max-width: 560px){
+	 .login-part{
+		display:none;
+	}
+
+
+	.menu ul{
+		padding-left: 0;
+	}
+
+
+    .menu ul .menu1{
+		display: none;
+	}
+
+	.menu-pic{
+		display: inline-block;
+		float: right;
+	}
+   .hovering:hover .hidden-menu{
+           display: block;
+   }
+
+   .content{
+   	margin-top: -1%;
+   }
+
+   .menu1 a{
+   	color: #63BD64;
+   }
+
+   .user_info{
+  	width: 90%;
+  	height: auto;
+  	padding-bottom: 45px;
+
+  }
+
+ .lab{
+ 	text-align: center;
+ 	display: block;
+ 	margin: auto;
+ 	width: 200px;
+ }
+
+   input {
+   	margin-top: 10px;
+   	margin-bottom: 10px;
+   }
+  form{
+  	margin-left: 27%;
+  }
+
+  .signup_link{
+  	margin:auto;
+  	width: 37%;
+  }
 }
