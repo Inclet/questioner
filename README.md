@@ -1,4 +1,4 @@
-# Questioner  [![Build Status](https://travis-ci.org/Inclet/questioner.svg?branch=develop)](https://travis-ci.org/Inclet/questioner)
+# Questioner  [![Build Status](https://travis-ci.org/Inclet/questioner.svg?branch=develop)](https://travis-ci.org/Inclet/questioner)  [![Coverage Status](https://coveralls.io/repos/github/Inclet/questioner/badge.svg?branch=coveralls-setting)](https://coveralls.io/github/Inclet/questioner?branch=coveralls-setting)
 
 Crowd-source questions for a meetup. **Questioner** helps the meetup organizer to prioritize questions to be answered. Other users can vote on asked questions and they bubble to the top or bottom of the log.
 
