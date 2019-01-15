@@ -32,6 +32,20 @@
 
         	 const clears = document.getElementById('adding-meetup');
         	 clears.style.display='block';
+
+
+			 const hide =document.getElementsByClassName('adding-removing');
+			 for (var i = 0; i < hide.length; i++) {
+        	 	hide[i].style.display='none';
+        	 }
+            
+			const show= document.getElementById('back');
+			show.style.display='block';
+
+            const show1 = document.getElementById('adding1');
+			show1.style.display = "block";
+			console.log('show1 pass')
+
         }
 
         function backing(){
@@ -86,9 +100,13 @@
 
 	</header>
 
-<div class="adding-removing">
+<div class="adding-removing" id="adding">
 <span class="delete" onclick="clearing();">&#10006; Delete a Meetup</span>	
 <span class="create" onclick="adding();">&#10010; Create a Meetup</span>
+</div>
+
+<div class="adding-1" id="adding1">
+ <a  class = "back" id="back" href="admin.html">&#8592; Back</a>
 </div>
 
 <div class="meetup-description" id="meetup-description">
@@ -204,11 +222,11 @@
 
      <div class="separating">
      <label class='one' for="short-description" class="short-desc">Short Description</label>
-     <textarea placeholder="Short Description of the Meetup" cols="34" rows="6" class="short-description" id="short-description"></textarea>
+     <textarea placeholder="Short Description of the Meetup" rows="5" class="short-description" id="short-description"></textarea>
      </div>
 
      <div  class="separating">
-     <label class='one' /for="speaker-field">Speaker</label>
+     <label class='one' for="speaker-field">Speaker</label>
      <input type="text" name="speaker-text" class="speaker-field" id="speaker-field" placeholder="Speaker Name...">
      </div>
  </div>

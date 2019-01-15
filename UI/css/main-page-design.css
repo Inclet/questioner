@@ -225,9 +225,9 @@ z-index: 1;
 .search{
 	font-family: sans-serif;
 	font-size: 15px;
-	float: right;
+	float:right;
 	display: inline;
-	padding:6px;
+	padding: 6px;
 	border-radius: 12px;
 	border: 2px solid white;
 	color: #63BD64;

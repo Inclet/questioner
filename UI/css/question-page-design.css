@@ -80,12 +80,14 @@ hr.one{
 .comment{
 	margin: 0px 10px;
 	height: 30px;
+	width:30%;
 	font-family: sans-serif;
 	font-size: 13px;
 	border: 2px solid #63BD63;
 	border-radius: 8px;
 	padding: 3px 6px;
 	color: grey;
+	outline:none;
 }
 
 .post-button{
@@ -97,6 +99,7 @@ hr.one{
 	background-color: #63BD64;
 	color:white;
 	padding: 7px;
+	outline:none;
 }
 
 
@@ -171,12 +174,15 @@ hr.one{
 
 .comment-1{
 	margin: 0px 5px;
+	height: 20px;
 	font-family: sans-serif;
 	font-size: 13px;
 	border: 2px solid #63BD63;
 	border-radius: 8px;
 	padding: 3px 6px;
 	color: grey;
+	outline:none;
+
 }
 
 
@@ -189,6 +195,7 @@ hr.one{
 	background-color: #63BD64;
 	color:white;
 	padding: 6px;
+	outline:none;
 }
 
 
