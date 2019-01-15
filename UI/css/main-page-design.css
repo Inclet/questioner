@@ -196,10 +196,10 @@ hr{
 
 
 .searching{
-margin-top: 5%;	
+margin-top: 8%;	
 padding: 1%;
 margin-right: 14.5%;
-z-index: 1
+z-index: 1;
 
 }
 
@@ -218,6 +218,7 @@ z-index: 1
 	border-radius: 12px;
 	border: 2px solid white;
 	margin-right: 5px;
+	outline: none;
 
 }
 
@@ -230,6 +231,7 @@ z-index: 1
 	border-radius: 12px;
 	border: 2px solid white;
 	color: #63BD64;
+	outline:none;
 }
 
 
