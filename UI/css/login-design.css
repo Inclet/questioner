@@ -11,9 +11,9 @@ header{
 }
 
 .menu{
-
+    display: inline-block;
 	float: left;
-	display: inline-block;
+	
 }
 
 
@@ -106,54 +106,49 @@ a:hover{
 }
 
 .user_login{
-    margin:auto;
+	margin:auto;
+	margin-top: 5%;
     background-color: white;
     width:37%;
-    height: 450px;
+    height: 430px;;
     opacity:0.9;
     border-radius: 8px;
     text-align: center;
-    font-family: sans-serif;
-    box-shadow: 5px 10px #8888888;
+	font-family: sans-serif;
+	
     
 
 }
 
-.user_login p{
- padding-top: 40px;
-
-}
 
 
 
-input{
-    margin-top: 20px;
-    margin-bottom: 5%;
-	padding: 12px 2px;
+
+.email{
+	margin: 3%;
+	padding: 14px;
 	border-radius: 4px;
 	border:2px solid #64BD63;
     text-align: center;
-    font-family: sans-serif;
+	font-family: sans-serif;
+	outline:none;
 }
 
-form{
-	padding: 8px;
-	margin-right: 27%;
-	margin-top: 2%;
-
-}
 
 .login-title{
 	color:#64BD63;
-	font-size: 25px;	
+	font-size: 30px;	
 	font-family: sans-serif;
+	display: inline-block;
+	margin:13% 0 8% 0;
 }
 
 .lab{
 	font-size: 17px;
 	color: #64BD63;
-	width: 44%;
-	text-align: right;
+	width: 20%;
+	text-align: left;
+	margin-left:-18%;
 	font-family: sans-serif;
 	display: inline-block;
 }
@@ -167,11 +162,11 @@ form{
 
 .login_link{
  	
-margin-left: 33.4%;
+margin-left: 30%;
 border:2px solid #64BD63;
 border-radius: 4px;
 padding:10px;
-width: 33%;
+width: 37%;
 }
 
 
