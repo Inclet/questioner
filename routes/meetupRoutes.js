@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post('/api/v1/meetups', meetupControllers.create);
 router.post('/api/v1/meetups/:id/rsvps', meetupControllers.respondRsvp);
-router.post('/api/v1/questions', questionControllers.createQuestion);
+router.post('/api/v1/meetups/:meetupID/questions/', questionControllers.createQuestion);
 router.get('/api/v1/meetups/:id', meetupControllers.fetchMeetup);
 router.get('/api/v1/meetups/upcoming/', meetupControllers.getUpcomingMeetups);
 router.get('/api/v1/meetups', meetupControllers.getAllMeetups);

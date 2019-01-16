@@ -6,7 +6,12 @@ const meetupQuestions = [{
 	meetup : 2,
 	title : "Future Transport",
 	body : "we are moving into the new era...",
-	votes : 5
+	upvotes : 3,
+	downvotes: 2,
+	state: [{
+		id:3,
+		action:"upvote"
+	}]
 }];
 
 
