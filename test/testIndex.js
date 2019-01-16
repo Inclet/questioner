@@ -287,7 +287,7 @@
                 res.body.data[0].should.have.property('meetup').eql(2);
                 res.body.data[0].should.have.property('body').eql('we are moving into the new era...');
                 res.body.data[0].should.have.property('title').eql('Future Transport');
-                res.body.data[0].should.have.property('votes').eql(6);
+                res.body.data[0].should.have.property('upvotes').eql(4);
                 done();
  		    })
  	})
@@ -308,7 +308,7 @@
                 res.body.data[0].should.have.property('meetup').eql(2);
                 res.body.data[0].should.have.property('body').eql('we are moving into the new era...');
                 res.body.data[0].should.have.property('title').eql('Future Transport');
-                res.body.data[0].should.have.property('votes').eql(5);
+                res.body.data[0].should.have.property('downvotes').eql(3);
                 done();
  		    });
  	})
@@ -367,7 +367,7 @@
  		}
 
  		chai.request(app)
- 		    .post('/api/v1/questions')
+ 		    .post('/api/v1/meetups/1/questions')
  		    .send(record)
  		    .end((err, res)=>{
             
@@ -393,7 +393,7 @@
  		}
 
  		chai.request(app)
- 		    .post('/api/v1/questions')
+ 		    .post('/api/v1/meetups/1/questions')
  		    .send(record)
  		    .end((err, res)=>{
             
@@ -414,7 +414,7 @@
  		}
 
  		chai.request(app)
- 		    .post('/api/v1/questions')
+ 		    .post('/api/v1/meetups/1/questions')
  		    .send(record)
  		    .end((err, res)=>{
             
@@ -434,7 +434,7 @@
  		}
 
  		chai.request(app)
- 		    .post('/api/v1/questions')
+ 		    .post('/api/v1/meetups/1/questions')
  		    .send(record)
  		    .end((err, res)=>{
             
@@ -454,7 +454,7 @@
  		}
 
  		chai.request(app)
- 		    .post('/api/v1/questions')
+ 		    .post('/api/v1/meetups/1/questions')
  		    .send(record)
  		    .end((err, res)=>{
             

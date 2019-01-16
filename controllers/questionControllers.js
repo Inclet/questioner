@@ -191,7 +191,7 @@ class questions{
                    id : parseInt(meetupQuestions.length +1),
                    createdOn : moment().format('LL'),
                    createdBy : 1,
-                   meetup : req.params.meetupID,
+                   meetup : parseInt(req.params.meetupID),
                    title,
                    body,
                    upvotes : 0,
