@@ -11,7 +11,12 @@ class questions{
 
       static upvoteQuestion(req, res){
 
-
+        if(isNaN(req.params.id))
+		return res.status(400).send({
+			status:400,
+			error: "Invalid ID. ID must be a number."
+        })
+        
      	const questionToUpdate = meetupQuestions.find( c => c.id === parseInt(req.params.id));
      	
      	if(!questionToUpdate)
@@ -41,6 +46,11 @@ class questions{
 }
 
         static downvoteQuestion(req, res){
+            if(isNaN(req.params.id))
+		return res.status(400).send({
+			status:400,
+			error: "Invalid ID. ID must be a number."
+		  })
             
             const questionToDownVote = meetupQuestions.find( c => c.id === parseInt(req.params.id));
         

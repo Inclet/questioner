@@ -3,6 +3,7 @@ import meetupQuestions from '../data/meetupQuestions';
 import rsvp from '../data/rsvpMeetups';
 import Joi from 'joi';
 import moment from 'moment';
+import { isString } from "util";
 
 moment.suppressDeprecationWarnings = true;
 
@@ -11,6 +12,11 @@ class meetup{
 	
 	static create(req, res){
 		const { topic, location, happeningOn, tags } = req.body;
+		if(!happeningOn.isValid())
+		 return res.status(400).send({
+			 status:400,
+			 error: "Date is not valid"
+		 })
 
 		const { error } = validateRecords(req.body);
 		if(error)
@@ -41,6 +47,11 @@ class meetup{
 
 
 	static fetchMeetup(req, res){
+		if(isNaN(req.params.id))
+		return res.status(400).send({
+			status:400,
+			error: "Invalid ID. ID must be a number."
+		})
 		const meetupId = meetupRecords.find(c => c.id === parseInt(req.params.id));
 		if(!meetupId)
 			return res.status(404).send({
@@ -98,6 +109,11 @@ class meetup{
     }
 
      static respondRsvp(req, res){
+		 if(isNaN(req.params.id))
+		    return res.status(400).send({
+			status:400,
+			error: "Invalid ID. ID must be a number."
+		   })
              
              const meetupId = meetupRecords.find(c => c.id === parseInt(req.params.id));
 
@@ -144,7 +160,7 @@ class meetup{
 
 function validateRecords(records){
 	const schema = {
-     	   topic : Joi.string().min(4).required(),
+     	   topic : Joi.string().min(2).required(),
      	   location: Joi.string().min(2).required(),
      	   happeningOn : Joi.string().min(2).required(),
      	   tags : Joi.string().min(2).required()
