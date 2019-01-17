@@ -12,6 +12,7 @@ class meetup{
 	
 	static create(req, res){
 		const { topic, location, happeningOn, tags } = req.body;
+
 		if(!isNaN(happeningOn))
 			return res.status(400).send({
 				status:400,
@@ -30,6 +31,8 @@ class meetup{
 			 error: "Date must be in the future"
 		 })
 
+
+
 		const { error } = validateRecords(req.body);
 		if(error)
 		     return res.status(400).send({
@@ -37,13 +40,26 @@ class meetup{
 				error: error.details[0].message
 			});
 
+
+
+		const entry = Object.entries(req.body);
+		for(const [key,value] of entry){
+			if(value.trim()==='')
+			return res.status(400).send({
+				status:400,
+				error:`${key} can not have spaces as value`
+			})
+		}
+
+
+
 		const newMeetup = {
 			id: parseInt(meetupRecords.length + 1 ),
-			topic,
+			topic: topic.trim(),
 			createdOn: moment().format('LL'),
-			location,
-			happeningOn : moment(happeningOn).format('LL'),
-			tags : tags.split(' ') 
+			location:location.trim(),
+			happeningOn : moment(happeningOn).format('LL').trim(),
+			tags : tags.trim().split(' ') 
 
 		}
 

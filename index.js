@@ -17,7 +17,7 @@ app.use(meetuproutes);
 
 
 app.use('/', (req,res) =>{
-	res.send('Welcome to Questioner APIs');
+	res.json('Welcome to Questioner APIs');
 });
 
 
