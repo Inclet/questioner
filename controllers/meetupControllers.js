@@ -12,10 +12,22 @@ class meetup{
 	
 	static create(req, res){
 		const { topic, location, happeningOn, tags } = req.body;
-		if(!happeningOn.isValid())
+		if(!isNaN(happeningOn))
+			return res.status(400).send({
+				status:400,
+				error:"Invalid Date"
+			})
+		
+		if(!moment(happeningOn).isValid())
 		 return res.status(400).send({
 			 status:400,
-			 error: "Date is not valid"
+			 error: "Invalid date"
+		 })
+
+		 if(moment(happeningOn).isSameOrBefore(moment().format('LL')))
+		 return res.status(400).send({
+			 status:400,
+			 error: "Date must be in the future"
 		 })
 
 		const { error } = validateRecords(req.body);
