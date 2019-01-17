@@ -185,6 +185,16 @@ class questions{
                 error: error.details[0].message
             });
 
+            const entry = Object.entries(req.body);
+
+            for(const [key, value] of entry){
+               if(value.trim()==='')
+               return res.status(400).send({
+                   status:400,
+                   error:`${key} can not hold spaces as value`
+               })
+            }
+
             const {title, body} = req.body
 
             const newQuestion = {
@@ -192,8 +202,8 @@ class questions{
                    createdOn : moment().format('LL'),
                    createdBy : 1,
                    meetup : parseInt(req.params.meetupID),
-                   title,
-                   body,
+                   title : title.trim(),
+                   body: body.trim(),
                    upvotes : 0,
                    downvotes: 0,
                    state:[]
@@ -209,8 +219,8 @@ class questions{
                 data : [{
                     user : newQuestion.createdBy,
                     meetup : newQuestion.meetup,
-                    title,
-                    body
+                    title: title.trim(),
+                    body: body.trim()
                 }]
             })
 
