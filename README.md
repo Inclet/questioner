@@ -41,6 +41,8 @@ You need need [postman](https://chrome.google.com/webstore/detail/postman/fhbjgb
 
 ` POST api/v1/meetups/<meetup-id>/rsvps ` Respond to meetup RSVP.
 
+` POST /api/v1/meetups/:meetupID/questions/ ` Create a questions for a specific meetup.
+
 ` PATCH api/v1/questions/<question-id>/upvote ` Upvote (increase votes by 1) a specific question.
 
 ` PATCH api/v1/questions/<question-id>/downvote ` Downvote (decrease votes by 1) a specific question.
