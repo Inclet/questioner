@@ -60,10 +60,11 @@ form{
 }
 
 .lab{
+	margin-left:5%;
 	font-size: 17px;
 	color: #64BD63;
 	width: 44%;
-	text-align: right;
+	text-align: left;
 	font-family: sans-serif;
 	display: inline-block;
 }
