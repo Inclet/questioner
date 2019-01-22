@@ -4,6 +4,11 @@ import rsvp from '../data/rsvpMeetups';
 import Joi from 'joi';
 import moment from 'moment';
 import { isString } from "util";
+import pg from 'pg';
+import dotenv from 'dotenv';
+import table from '../database/db.js';
+
+
 
 moment.suppressDeprecationWarnings = true;
 
@@ -53,24 +58,41 @@ class meetup{
 
 
 
-		const newMeetup = {
-			id: parseInt(meetupRecords.length + 1 ),
-			topic: topic.trim(),
-			createdOn: moment().format('LL'),
-			location:location.trim(),
-			happeningOn : moment(happeningOn).format('LL').trim(),
-			tags : tags.trim().split(' ') 
+		const newMeetup = [
+			topic.trim(),
+			moment().format('LL'),
+			location.trim(),
+			moment(happeningOn).format('LL').trim(),
+			tags.trim().split(' ') 
 
-		}
+		]
 
-		meetupRecords.push(newMeetup);
-		
-		return res.status(201).send({
-			status:201,
-			data:[
-			    newMeetup
-			]
+		// const validateRecord = `
+		// SELECT * FROM meetupRecords 
+		// WHERE happeningOn =`${newMeetup[3]}` AND topic =`${newMeetup[0]}` 
+		// `;
+
+		const sql = `
+		INSERT INTO meetupRecords(topic, createdOn, location, happeningOn, tags)
+		VALUES($1, $2, $3, $4, $5)
+		returning *
+		`;
+
+		table.pool.query(sql, newMeetup)
+		.then((ress)=>{
+			return res.status(201).send({
+				status:201,
+				data: ress.rows
+			});
 		})
+		.catch((err)=>{
+			return res.status(400).send({
+				status:400,
+				error: err.message
+			});
+		})
+	
+		
 	}
 
 
