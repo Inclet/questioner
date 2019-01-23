@@ -3,9 +3,6 @@ import meetupQuestions from '../data/meetupQuestions';
 import rsvp from '../data/rsvpMeetups';
 import Joi from 'joi';
 import moment from 'moment';
-import { isString } from "util";
-import pg from 'pg';
-import dotenv from 'dotenv';
 import table from '../database/db.js';
 
 
@@ -69,8 +66,19 @@ class meetup{
 
 		// const validateRecord = `
 		// SELECT * FROM meetupRecords 
-		// WHERE happeningOn =`${newMeetup[3]}` AND topic =`${newMeetup[0]}` 
+		// WHERE happeningOn =${newMeetup[3]} AND topic =${newMeetup[0]}
 		// `;
+		// table.pool.query(validateRecord)
+		// .then((res)=>{
+        //     console.log('Record is valid');
+		// })
+		// .catch((err)=>{
+		// 	return res.status(400).send({
+		// 		status:400,
+		// 		data: err.message
+		// 	})
+		// })
+
 
 		const sql = `
 		INSERT INTO meetupRecords(topic, createdOn, location, happeningOn, tags)
@@ -102,46 +110,73 @@ class meetup{
 			status:400,
 			error: "Invalid ID. ID must be a number."
 		})
-		const meetupId = meetupRecords.find(c => c.id === parseInt(req.params.id));
-		if(!meetupId)
-			return res.status(404).send({
-				status:404,
-				error : 'No such meetup Can Be Found'
-			});
+		 
+		const sql = `
+		SELECT * FROM meetupRecords
+		WHERE id = ${req.params.id}
+		`;
+		table.pool.query(sql)
+		.then((ress)=>{
+			if(ress.rows.length > 0){
+			return res.status(200).send({
+				status:200,
+				data: ress.rows,
+			})
+		}
 
-		const {id, topic, location, happeningOn, tags} = meetupId;
+		return res.status(404).send({
+			status:404,
+			data:"ID can not be Found"
 
-		res.status(200).send({
-			status:200,
-			data : [{
-				id,
-				topic,
-				location,
-				happeningOn,
-				tags
-			}]
 		})
+		})
+		.catch((err)=>{
+			return res.send({
+				status:"DB ERROR",
+				erro: err.message
+			})
+		})
+
+		
 	}
 
 
 	static getAllMeetups(req, res){
-		return res.send({
-			status : 200,
-			data : meetupRecords
+	const sql =`
+	SELECT * FROM meetupRecords
+	` ;
+
+		table.pool.query(sql)
+		.then((ress) => {
+			return res.status(200).send({
+				status:200,
+				data: ress.rows
+			})
+		} )
+
+		.catch((err)=>{
+			return res.send({
+				status:"DB ERROR",
+				error:err.message
+			})
 		})
 	}
 
 
 	static getUpcomingMeetups(req, res){
 
-		var recording = [];
 
+		const sql = `
+		SELECT * FROM meetupRecords
+		`;
 
+		table.pool.query(sql)
+        .then((ress)=>{
+		let recording = [];
+        for(var i = 0; i < ress.rows.length; i++){
 
-        for(var i = 0; i < meetupRecords.length; i++){
-
-         if(moment(meetupRecords[i].happeningOn).isSameOrAfter(moment().format('LL')))
-         	  recording.push(meetupRecords[i]);
+         if(moment(ress.rows[i].happeningOn).isSameOrAfter(moment().format('LL')))
+         	  recording.push(ress.rows[i]);
         }
 
         if(recording.length > 0)
@@ -150,12 +185,22 @@ class meetup{
         		data : 
                    recording
         		
-        	});
+			});
+			
+		
         else
         	return res.status(404).send({
         		status: 404,
         		error : "No Upcoming meetup..."
-        	});
+			});
+			
+		})
+		.catch((err)=>{
+			return releaseEvents.send({
+				status:"DB ERROR",
+				error: err.message
+			})
+		})
     }
 
      static respondRsvp(req, res){
@@ -165,23 +210,33 @@ class meetup{
 			error: "Invalid ID. ID must be a number."
 		   })
              
-             const meetupId = meetupRecords.find(c => c.id === parseInt(req.params.id));
+		   const sql = `
+		   SELECT * FROM meetupRecords
+		   WHERE id = ${req.params.id}
+		   `;
 
-             if(meetupId){
-             	
-             	
+		   table.pool.query(sql)
+		   .then((ress)=>{
+
+             if(ress.rows){  	
             if (req.body.status.toLowerCase() != "yes" && req.body.status.toLowerCase() != "no" && req.body.status.toLowerCase() != "maybe")
             	return res.status(400).send({
             		status:400,
             		error : "Bad Request. value assigned to status is not valid"
-            	})
-             const { topic } = meetupId;
+				})
+				
+             const { topic } = ress.rows;
              const newRsvp = {
-                id : parseInt(rsvp.length) + 1,
-             	meetup : meetupId.id,
+             	meetup : ress.rows.id,
              	topic,
-             	status : req.body.status
-             }
+             	response : req.body.status
+			 }
+			 
+			 const sql1 = `
+			 INSERT INTO rsvp(meetup,user_id, response)
+			 VALUES($1,$2,$3)
+			 `;
+			 table.pool.query(sql1, newRsvp)
 
              rsvp.push(newRsvp);
 
@@ -200,7 +255,9 @@ class meetup{
          	return res.status(404).send({
          		status : 404,
          		error : 'No such ID can be found'
-         	})
+			 })
+			 
+			})
      }
 
 

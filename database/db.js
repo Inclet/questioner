@@ -74,7 +74,8 @@ class Setup{
             othername VARCHAR(50),
             email VARCHAR(40) NOT NULL,
             phonenumber VARCHAR(15) NOT NULL,
-            username VARCHAR(20) NOT NULL,
+            username VARCHAR(20) NOT NULL UNIQUE,
+            password VARCHAR(18) NOT NULL,
             registered VARCHAR(50) NOT NULL,
             isAdmin BOOLEAN NOT NULL
         )`;

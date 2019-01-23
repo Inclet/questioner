@@ -1,8 +1,8 @@
 import meetupQuestions from '../data/meetupQuestions';
-import meetups from "../data/meetupRecords";
 import Joi from 'joi';
 import moment from 'moment';
 import user from '../data/users';
+import table from '../database/db.js';
 
 
 class questions{
@@ -171,8 +171,13 @@ class questions{
             })
         }
 
-           const meetupSearch = meetups.find(c => c.id === parseInt(req.params.meetupID))
-           if(!meetupSearch)
+        const sql = `
+		SELECT * FROM meetupRecords
+		WHERE id = ${req.params.id}
+		`;
+        table.pool.query(sql)
+        .then((ress)=>{
+           if(ress.rows.length === 0)
             return res.status(404).send({
                 status:404,
                 error:"Meetup with such ID can not be found"
@@ -198,7 +203,6 @@ class questions{
             const {title, body} = req.body
 
             const newQuestion = {
-                   id : parseInt(meetupQuestions.length +1),
                    createdOn : moment().format('LL'),
                    createdBy : 1,
                    meetup : parseInt(req.params.meetupID),
@@ -224,10 +228,12 @@ class questions{
                 }]
             })
 
-        }
+        })
 
 
 
+
+}
 
 }
 
