@@ -17,6 +17,7 @@ router.get('/api/v1/meetup/upcoming', meetupControllers.getUpcomingMeetups);
 router.get('/api/v1/meetups', meetupControllers.getAllMeetups);
 router.patch('/api/v1/questions/:id/upvote', questionControllers.upvoteQuestion);
 router.patch('/api/v1/questions/:id/downvote', questionControllers.downvoteQuestion);
+router.delete('/api/v1/meetups/:meetupID', meetupControllers.deleteMeetup)
 
 
 

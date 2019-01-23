@@ -173,15 +173,24 @@ class questions{
 
         const sql = `
 		SELECT * FROM meetupRecords
-		WHERE id = ${req.params.id}
-		`;
+		WHERE id = '${req.params.meetupID}'
+        `;
+        
+        const sql1 =`
+        INSERT INTO meetupQuestions(createdon, createdby, meetup, title, body, upvotes, downvotes)
+        VALUES($1, $2, $3, $4, $5, $6, $7)
+        RETURNING *
+        `;
         table.pool.query(sql)
         .then((ress)=>{
-           if(ress.rows.length === 0)
+           if(ress.rows.length === 0){
             return res.status(404).send({
                 status:404,
                 error:"Meetup with such ID can not be found"
             })
+          }
+
+            else{
         
             const { error } = validateRecords(req.body);
             if(error)
@@ -202,32 +211,46 @@ class questions{
 
             const {title, body} = req.body
 
-            const newQuestion = {
-                   createdOn : moment().format('LL'),
-                   createdBy : 1,
-                   meetup : parseInt(req.params.meetupID),
-                   title : title.trim(),
-                   body: body.trim(),
-                   upvotes : 0,
-                   downvotes: 0,
-                   state:[]
+            const newQuestion = [
+                   moment().format('LL'),
+                   3,
+                   parseInt(req.params.meetupID),
+                   title.trim(),
+                   body.trim(),
+                   0,
+                   0
 
-            }
+            ]
 
-
-            meetupQuestions.push(newQuestion);
-
-
-            return res.status(201).send({
-                status : 201,
-                data : [{
-                    user : newQuestion.createdBy,
-                    meetup : newQuestion.meetup,
-                    title: title.trim(),
-                    body: body.trim()
-                }]
+            table.pool.query(sql1, newQuestion)
+            .then((resp)=>{
+                const {user, meetup} = resp.rows[0];
+                return res.status(201).send({
+                    status : 201,
+                    data : [{
+                        user,
+                        meetup,
+                        title: title.trim(),
+                        body: body.trim()
+                    }]
+                })
+            })
+            .catch((err)=>{
+                return res.send({
+                    status:"DB ERROR",
+                    error:err.message
+                })
             })
 
+        }
+
+        })
+
+        .catch((error)=>{
+            return res.send({
+                status:"DB ERROR",
+                error:error.message
+            })
         })
 
 
