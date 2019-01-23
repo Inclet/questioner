@@ -72,12 +72,12 @@ class Setup{
             firstname VARCHAR(50) NOT NULL,
             lastname VARCHAR(50) NOT NULL,
             othername VARCHAR(50),
-            email VARCHAR(40) NOT NULL,
-            phonenumber VARCHAR(15) NOT NULL,
+            email VARCHAR(40) NOT NULL UNIQUE,
+            phonenumber INT NOT NULL,
             username VARCHAR(20) NOT NULL UNIQUE,
             password VARCHAR(18) NOT NULL,
             registered VARCHAR(50) NOT NULL,
-            isAdmin BOOLEAN NOT NULL
+            isAdmin BOOLEAN NOT NULL DEFAULT false
         )`;
 
         this.pool.query(users)
@@ -104,7 +104,23 @@ class Setup{
         })
         .catch((error)=>{
             console.log(error.message);
-            this.pool.end();
+        })
+
+
+        const commentsTables = `
+        CREATE TABLE IF NOT EXISTS comments(
+            user_id INT NOT NULL REFERENCES user_table(id) ON DELETE CASCADE ON UPDATE CASCADE,
+            question_id INT NOT NULL REFERENCES meetupQuestions(id) ON DELETE CASCADE ON UPDATE CASCADE,
+            comment text NOT NULL,
+            happenedOn VARCHAR(20)
+        )`;
+
+        this.pool.query(commentsTables)
+        .then((res)=>{
+            console.log(res);
+        })
+        .catch((error)=>{
+            console.log(error.message);
         })
 
     }

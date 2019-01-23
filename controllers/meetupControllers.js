@@ -64,20 +64,6 @@ class meetup{
 
 		]
 
-		// const validateRecord = `
-		// SELECT * FROM meetupRecords 
-		// WHERE happeningOn =${newMeetup[3]} AND topic =${newMeetup[0]}
-		// `;
-		// table.pool.query(validateRecord)
-		// .then((res)=>{
-        //     console.log('Record is valid');
-		// })
-		// .catch((err)=>{
-		// 	return res.status(400).send({
-		// 		status:400,
-		// 		data: err.message
-		// 	})
-		// })
 
 
 		const sql = `
