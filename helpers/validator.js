@@ -3,15 +3,21 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 
-let validateToken = (req, res) => {
-  let token = req.headers['x-access-token'] || req.headers['authorization']; 
-  if (token.startsWith('Bearer ')) {
+let validateToken = (req, res, next) => {
+let token = req.headers['x-access-token'] || req.headers['authorization']; 
+  if(!token){
+    return res.status(401).send({
+      status:401,
+      error:"Unauthorized access"
+    })
+  }  
+if (token.startsWith('Bearer ')) {
 
     token = token.slice(7, token.length);
   }
 
   if (token) {
-    jwt.verify(token, process.env.secret, (err, decode) => {
+    jwt.verify(token,'love-me', (err, decode) => {
       if (err) {
         return res.send({
           success: false,
@@ -19,6 +25,7 @@ let validateToken = (req, res) => {
         });
       } else {
         req.decode = decode;
+        next();
       }
     });
   } else {

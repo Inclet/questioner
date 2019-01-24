@@ -6,7 +6,7 @@ dotenv.config();
 class Setup{
     constructor(){
        this.pool = new Pool({
-           user:'postgres',
+           user: 'postgres',
            host:'localhost',
            database:'mydb',
            password:'Gievansrosey18!',

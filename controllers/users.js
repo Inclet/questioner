@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import user from '../data/users.js';
 import jwt from 'jsonwebtoken';
 import key from '../helpers/config';
+import some from '../helpers/val';
 dotenv.config();
 
 
@@ -16,28 +17,21 @@ class users{
         WHERE username = '${req.body.username}' AND password = '${req.body.password}'
         `;
         table.pool.query(sql)
-        .then((ress)=>{
-            if(ress.rows.length > 0){
-               
-                jwt.sign(ress.rows[0], key.secret,(err, token)=>{
-                    if(token){
-                      return res.status(200).send({
-                          status:200,
-                          data:"Login Successfull",
-                          token: token
-                 });
-                }
-                else{
-                    return res.send({
-                        status:"TOKEN ERROR",
-                        error : err.message,
-                     });
-                }
-            })
+        .then((resp)=>{
+            
+            if(resp.rows.length > 0){
+                
+                const {id, username} = resp.rows[0];
+                const load = {
+                     id,
+                     username
+                   };   
+            //create a token
+              some.sign(req,res,load, 200);      
             }
            else{
-            return res.status(400).send({
-                status:400,
+            return res.status(401).send({
+                status:401,
                 error: "Username or Password is Incorrect"
             })
         }
@@ -75,25 +69,16 @@ class users{
 
         table.pool.query(sql, newUser)
         .then((response)=>{
-
-            jwt.sign(response.rows[0], key.secret,(err, token)=>{
-                if(token){
-                  return res.status(201).send({
-                      status:201,
-                      data:[{
-                          token: token,
-                          user: response.rows[0]
-                      }]
-                      
-             });
-             }
-             else{
-                return res.send({
-                    status:"TOKEN ERROR",
-                    error : err.message,
-                 });
+            if(response.rows.length > 0){
+                console.log(response.rows[0]);
+                const {id, username} = response.rows[0];
+                const load = {
+                     id,
+                     username
+                   };    
+            //create a token
+              some.sign(req,res,load, 200);      
             }
-        })
             
         })
         .catch((error)=>{
@@ -163,5 +148,7 @@ class users{
       }
 
 }
+
+
 
 export default users;
