@@ -123,6 +123,21 @@ class Setup{
             console.log(error.message);
         })
 
+        const questionState =`
+        CREATE TABLE IF NOT EXISTS questionState(
+           question_id INT NOT NULL REFERENCES meetupQuestions(id) ON DELETE CASCADE ON UPDATE CASCADE,
+           user_id INT NOT NULL,
+           action VARCHAR(8) NOT NULL
+        )`; 
+
+        this.pool.query(questionState)
+        .then((res)=>{
+            console.log(res);
+        })
+        .catch((error)=>{
+            console.log(error.message);
+        })
+
     }
 }
 

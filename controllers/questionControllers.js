@@ -7,10 +7,6 @@ import table from '../database/db.js';
 
 class questions{
 
-	constructor(){
-
-	}
-
       static upvoteQuestion(req, res){
 
         if(isNaN(req.params.id))
@@ -19,74 +15,127 @@ class questions{
 			error: "Invalid ID. ID must be a number."
         })
         
-     	const questionToUpdate = meetupQuestions.find( c => c.id === parseInt(req.params.id));
-     	
-     	if(!questionToUpdate)
-     		return res.status(400).send({
-     			status:400,
-     			error : 'No question with such ID exist, hence No Update can be performed'
-     		});
-
-     	if(questionToUpdate){
-
-         const checkAction = questionToUpdate.state.find(c => c.id === parseInt(user[0].id))
-
-         if(checkAction && checkAction.action ==="downvote"){
-
-            questionToUpdate.upvotes +=1;
-            questionToUpdate.downvotes -=1;
-            checkAction.action="upvote"
-            questionToUpdate.state.push(checkAction)
-
-            const { meetup, title, body, upvotes, downvotes } = questionToUpdate;
- 
-             return res.status(201).send({
-                 status : 201,
-                 data : [
-                 {
-                     meetup,
-                     title,
-                     body,
-                     upvotes,
-                     downvotes
-                 }
-                 ]
-             })
-            }
-
-        if(checkAction && checkAction.action ==="upvote"){
-
-             return res.status(403).send({
-                 status:403,
-                 error:"You are not allowed to upvote 2 times."
-             })
-         }
+         const sql =`
+         SELECT * FROM meetupQuestions
+         WHERE id = '${req.params.id}'
+         `;
 
 
-        if(!checkAction){
+         table.pool.query(sql)
+         .then((resp)=>{
+             if(resp.rows.length > 0){
+                const sql1=`
+                  SELECT meetupQuestions.createdby, questionState.action
+                  FROM meetupQuestions
+                  INNER JOIN questionState ON meetupQuestions.id = questionState.question_id
+                  `;
 
-            questionToUpdate.upvotes = questionToUpdate.upvotes + 1;
-            const { meetup, title, body, upvotes, downvotes } = questionToUpdate;
-            const newAction = {
-                id: user[0].id,
-                action:"upvote"
-            }
-            questionToUpdate.state.push(newAction);
+                table.pool.query(sql1)
+                .then((response)=>{
+                    if(response.rows.length > 0 && response.rows[0].action === 'downvote'){
+                              // when a user has upvoted before
+                           const sql2 =`
+                                UPDATE meetupquestions
+                                SET upvotes = upvotes +1
+                                WHERE id = '${resp.rows[0].id}'
+                                RETURNING *
+                            `;
+                            const sql3 =`
+                               UPDATE meetupquestions
+                               SET downvotes = downvotes -1
+                               WHERE id = '${resp.rows[0].id}'
+                               RETURNING *
+                          `;
 
-     		return res.status(201).send({
-     			status : 201,
-     			data : [
-                    {
-                        meetup,
-                        title,
-                        body,
-                        upvotes,
-                        downvotes
+                          const sql4=`
+                               UPDATE questionState
+                               SET action = 'upvote'
+                               WHERE user_id = '${resp.rows[0].id}'
+                               RETURNING *
+                        `;
+                        table.pool.query(sql2);
+                        table.pool.query(sql3);
+                        table.pool.query(sql4);
+                        const {meetup, title, body, upvotes, downvotes} = resp.rows[0];
+                        return res.status(201).send({
+                            status:201,
+                            data:[{
+                                meetup,
+                                title,
+                                body,
+                                upvotes:upvotes+1,
+                                downvotes: downvotes-1
+                            }]
+                        })
+                        
+                    
                     }
-     			]
-             })
-            }
-     }
+                    if(response.rows.length > 0 && response.rows[0].action === 'upvote'){
+                        
+                        return res.status(403).send({
+                            status:403,
+                            error:"You are not allowed to upvote 2 times."
+                        })
+                    }
+                    else{         // when a user has not done anything
+
+                        const sql2 =`
+                                UPDATE meetupquestions
+                                SET upvotes = upvotes +1
+                                WHERE id = '${resp.rows[0].id}'
+                                RETURNING *
+                            `;
+                        const sql5=`
+                            INSERT INTO questionState(question_id, user_id, action)
+                            VALUES($1, $2, $3)
+                            RETURNING *
+                            `;
+                        table.pool.query(sql2)
+                        .then(()=>{
+                        const newRecord =[
+                            req.params.id,
+                            resp.rows[0].id,
+                            "upvote"
+                        ] 
+                        table.pool.query(sql5, newRecord)
+                        .then((answer)=>{
+                        const {meetup, title, body, upvotes, downvotes} = resp.rows[0];
+                        return res.status(201).send({
+                            status:201,
+                            data:[{
+                                meetup,
+                                title,
+                                body,
+                                upvotes:upvotes+1,
+                                downvotes
+                            }]
+                        }) })
+                        .catch((err)=>{
+                            return res.send({
+                                status:"DB ERROR",
+                                error:err.message
+                            })
+                        })
+
+                        })
+                    }
+                })
+                .catch((error)=>{
+                    return res.send({
+                        status:"DB ERROR",
+                        error: error.message
+                    })
+                })  
+             }
+             else{
+                return res.status(400).send({
+                    status:400,
+                    error : 'No question with such ID exist, hence No Update can be performed'
+                });  
+             }
+         })
+     	
+     	
 
 }
 
@@ -95,70 +144,128 @@ class questions{
 		         return res.status(400).send({
 			     status:400,
 			      error: "Invalid ID. ID must be a number."
-		         })
+                 })
+                 const sql =`
+         SELECT * FROM meetupQuestions
+         WHERE id = '${req.params.id}'
+         `;
+
+
+         table.pool.query(sql)
+         .then((resp)=>{
+             if(resp.rows.length > 0){
+                const sql1=`
+                  SELECT meetupQuestions.createdby, questionState.action
+                  FROM meetupQuestions
+                  INNER JOIN questionState ON meetupQuestions.id = questionState.question_id
+                  `;
+
+                table.pool.query(sql1)
+                .then((response)=>{
+                    if(response.rows.length > 0 && response.rows[0].action === 'upvote'){
+                              // when a user has upvoted before
+                           const sql2 =`
+                                UPDATE meetupquestions
+                                SET upvotes = upvotes - 1
+                                WHERE id = '${resp.rows[0].id}'
+                                RETURNING *
+                            `;
+                            const sql3 =`
+                               UPDATE meetupquestions
+                               SET downvotes = downvotes + 1
+                               WHERE id = '${resp.rows[0].id}'
+                               RETURNING *
+                          `;
+
+                          const sql4=`
+                               UPDATE questionState
+                               SET action = 'downvote'
+                               WHERE user_id = '${resp.rows[0].id}'
+                               RETURNING *
+                        `;
+                        table.pool.query(sql2);
+                        table.pool.query(sql3);
+                        table.pool.query(sql4);
+                        const {meetup, title, body, upvotes, downvotes} = resp.rows[0];
+                        return res.status(201).send({
+                            status:201,
+                            data:[{
+                                meetup,
+                                title,
+                                body,
+                                upvotes:upvotes-1,
+                                downvotes: downvotes +1
+                            }]
+                        })
+                        
+                    
+                    }
+                    if(response.rows.length > 0 && response.rows[0].action === 'downvote'){
+                        
+                        return res.status(403).send({
+                            status:403,
+                            error:"You are not allowed to downvote 2 times."
+                        })
+                    }
+                    else{         // when a user has not done anything
+
+                        const sql2 =`
+                                UPDATE meetupquestions
+                                SET downvotes = downvotes +1
+                                WHERE id = '${resp.rows[0].id}'
+                                RETURNING *
+                            `;
+                        const sql5=`
+                            INSERT INTO questionState(question_id, user_id, action)
+                            VALUES($1, $2, $3)
+                            RETURNING *
+                            `;
+                        table.pool.query(sql2)
+                        .then(()=>{
+                        const newRecord =[
+                            req.params.id,
+                            resp.rows[0].id,
+                            "upvote"
+                        ] 
+                        table.pool.query(sql5, newRecord)
+                        .then((answer)=>{
+                        const {meetup, title, body, upvotes, downvotes} = resp.rows[0];
+                        return res.status(201).send({
+                            status:201,
+                            data:[{
+                                meetup,
+                                title,
+                                body,
+                                upvotes,
+                                downvotes
+                            }]
+                        }) })
+                        .catch((err)=>{
+                            return res.send({
+                                status:"DB ERROR",
+                                error:err.message
+                            })
+                        })
+
+                        })
+                    }
+                })
+                .catch((error)=>{
+                    return res.send({
+                        status:"DB ERROR",
+                        error: error.message
+                    })
+                })  
+             }
+             else{
+                return res.status(400).send({
+                    status:400,
+                    error : 'No question with such ID exist, hence No Update can be performed'
+                });  
+             }
+         })
             
-            const questionToDownVote = meetupQuestions.find( c => c.id === parseInt(req.params.id));
-        
-         if(!questionToDownVote)
-            return res.status(400).send({
-                status:400,
-                error : 'No question with such ID exist, hence No Update can be performed'
-            });
-
-        if(questionToDownVote){
-            const checkAction = questionToDownVote.state.find(c => c.id === parseInt(user[0].id))
-           
-            if(checkAction && checkAction.action ==="upvote"){
-               questionToDownVote.upvotes -=1;
-               questionToDownVote.downvotes +=1;
-               checkAction.action="downvote"
-            questionToDownVote.state.push(checkAction)
-            const { meetup, title, body, upvotes, downvotes } = questionToDownVote;
-
-            return res.status(201).send({
-                status : 201,
-                data : [
-                {
-                    meetup,
-                    title,
-                    body,
-                    upvotes,
-                    downvotes
-                }
-                ]
-            })
-           }
-           if(checkAction && checkAction.action ==="downvote"){
-            return res.status(403).send({
-                status:403,
-                error:"You are not allowed to downvote 2 times."
-            })
-        }
-
-            if(!checkAction){
-            questionToDownVote.downvotes += 1;
-            const { meetup, title, body, upvotes, downvotes } = questionToDownVote;
-            const newAction = {
-                id: user[0].id,
-                action:"downvote"
-            }
-            questionToDownVote.state.push(newAction);
-
-            return res.status(201).send({
-                status : 201,
-                data : [
-                {
-                    meetup,
-                    title,
-                    body,
-                    upvotes,
-                    downvotes
-                }
-                ]
-            })
-            }
-
-        }
+            
     }
 
 
