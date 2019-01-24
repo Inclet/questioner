@@ -1,16 +1,15 @@
 import { Pool } from 'pg';
-import dotenv from 'dotenv';
-
-dotenv.config();
+import ENV from 'dotenv';
+ENV.config();
 
 class Setup{
     constructor(){
        this.pool = new Pool({
-           user: 'postgres',
-           host:'localhost',
-           database:'mydb',
-           password:'Gievansrosey18!',
-           port:5000
+           user: process.env.PGUSER,
+           host:process.env.PGHOST,
+           database:process.env.PGDATABASE,
+           password:process.env.PGPASSWORD,
+           port:process.env.PORT
        });
 
        this.pool.on('connect',()=> {

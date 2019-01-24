@@ -133,11 +133,19 @@ class meetup{
 	` ;
 
 		table.pool.query(sql)
-		.then((ress) => {
+		.then((resp) => {
+			if(resp.rows.length >0){
 			return res.status(200).send({
 				status:200,
-				data: ress.rows
+				data: resp.rows
 			})
+		}
+		else{
+			return res.status(200).send({
+				status:200,
+				data: "No meetup "
+			})
+		}
 		} )
 
 		.catch((err)=>{
