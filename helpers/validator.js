@@ -17,7 +17,7 @@ if (token.startsWith('Bearer ')) {
   }
 
   if (token) {
-    jwt.verify(token,'love-me', (err, decode) => {
+    jwt.verify(token, process.env.secret, (err, decode) => {
       if (err) {
         return res.send({
           success: false,

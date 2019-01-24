@@ -4,7 +4,7 @@ dotenv.config();
 
 module.exports={
     sign:(req,res,payload,status)=>{
-        jwt.sign(payload, 'love-me',{expiresIn:'1d'},(err,token)=>{
+        jwt.sign(payload,process.env.secret,{expiresIn:'1d'},(err,token)=>{
             if(err){
                 return res.send({
                     status:"TOKEN ERROR",

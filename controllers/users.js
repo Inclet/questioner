@@ -3,9 +3,8 @@ import moment from 'moment';
 import table from '../database/db.js';
 import dotenv from 'dotenv';
 import user from '../data/users.js';
-import jwt from 'jsonwebtoken';
-import key from '../helpers/config';
-import some from '../helpers/val';
+import jwt from 'jsonwebtoken'
+;import some from '../helpers/val';
 dotenv.config();
 
 
