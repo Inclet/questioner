@@ -9,7 +9,7 @@ class Setup{
            host:process.env.PGHOST,
            database:process.env.PGDATABASE,
            password:process.env.PGPASSWORD,
-           port:process.env.PORT
+           port:process.env.PGPORT
        });
 
        this.pool.on('connect',()=> {

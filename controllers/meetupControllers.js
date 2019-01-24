@@ -227,7 +227,6 @@ class meetup{
 				 3,
              	req.body.status
 			 ]
-			 console.log(newRsvp)
 			 const sql1 = `
 			 INSERT INTO rsvp(meetup, user_id, response)
 			 VALUES($1,$2,$3)
