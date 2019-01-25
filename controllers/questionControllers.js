@@ -320,7 +320,7 @@ class questions{
 
             const newQuestion = [
                    moment().format('LL'),
-                   5,
+                   1,
                    parseInt(req.params.meetupID),
                    title.trim(),
                    body.trim(),

@@ -111,7 +111,7 @@ class users{
             console.log(response.rows);
             if (response.rows.length > 0 ){
                 console.log('here...')
-               table.pool.query(sql1,[req.body.comment, 3, req.params.questionID, moment().format('LL')])
+               table.pool.query(sql1,[req.body.comment, 1, req.params.questionID, moment().format('LL')])
                .then((resp)=>{
                    return res.status(201).send({
                        status:201,
