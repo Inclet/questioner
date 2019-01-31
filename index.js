@@ -1,6 +1,8 @@
 import express from 'express';
 import meetuproutes from './routes/meetupRoutes';
 import bodyparser from 'body-parser';
+import ENV from 'dotenv';
+ENV.config();
 
 const app = express();
 app.use(bodyparser.json());
