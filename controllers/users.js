@@ -69,7 +69,6 @@ class users{
         table.pool.query(sql, newUser)
         .then((response)=>{
             if(response.rows.length > 0){
-                console.log(response.rows[0]);
                 const {id, username} = response.rows[0];
                 const load = {
                      id,

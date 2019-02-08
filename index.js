@@ -18,7 +18,7 @@ const port = process.env.PORT || 3000;
 app.use(meetuproutes);
 
 
-app.use('/', (req,res) =>{
+app.use('/', (req, res) =>{
 	res.json('Welcome to Questioner APIs');
 });
 

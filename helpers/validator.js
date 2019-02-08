@@ -23,6 +23,7 @@ if (token.startsWith('Bearer ')) {
           success: false,
           message: 'Token is not valid'
         });
+    
       } else {
         req.decode = decode;
         next();

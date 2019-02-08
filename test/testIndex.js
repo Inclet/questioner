@@ -3,49 +3,68 @@
  import app from '../index';
 
  chai.should();
-
+ let token;
  chai.use(chaiHttp);
 
+
  describe('get all meetup records', () => {
-   it('/GET /meetups', (done) =>{
 
-    chai.request(app)
-        .get('/api/v1/meetups')
-        .end((err, res)=>{
-           res.body.should.be.a('object');
-           res.body.should.have.property('status').eql(200);
-           res.body.should.have.property('data');
-           res.body.data.should.be.a('array');
-           res.body.data[0].should.have.property('id');
-           res.body.data[0].should.have.property('createdOn');
-           res.body.data[0].should.have.property('topic');
-           res.body.data[0].should.have.property('location');
-           res.body.data[0].should.have.property('happeningOn');
-           res.body.data[0].should.have.property('tags');
-           res.body.data[0].tags.should.be.a('array');
-           done();
-        })
+	before((done)=>{
+		const cred = {
+			username: "clet1",
+			password: "pa;"
+		}
 
-   })
+		chai.request(app)
+		.post('/api/v1/auth/login')
+		.send(cred)
+		.end((err, res)=>{
+			token = res.body.data[0].token;
+			console.log(token);
+			done();
+		})
+	
+	})
 
- });
+	it('/GET /meetups', (done) =>{
+	 chai.request(app)
+		 .get('/api/v1/meetups')
+		 .set('Authorization', token)
+		 .end((err, res)=>{
+			console.log(token);
+			res.body.should.be.a('object');
+			res.body.should.have.property('status').eql(200);
+			res.body.should.have.property('data');
+			res.body.data.should.be.a('array');
+			res.body.data[0].should.have.property('id');
+			res.body.data[0].should.have.property('createdon');
+			res.body.data[0].should.have.property('topic');
+			res.body.data[0].should.have.property('location');
+			res.body.data[0].should.have.property('happeningon');
+			res.body.data[0].should.have.property('tags');
+			done();
+		 })
+ 
+	})
+ 
+  });
 
  describe('get a specific meetup record', ()=>{
    it('/GET /meetups/<meetup-id>', (done)=>{
 
             chai.request(app)
-               .get('/api/v1/meetups/1')
+			   .get('/api/v1/meetups/1')
+			   .set('Authorization', token)
                .end((err, res)=>{
                	res.body.should.be.a('object');
                 res.body.should.have.property('status').eql(200);
                 res.body.should.have.property('data');
                 res.body.data.should.be.a('array');
                 res.body.data[0].should.have.property('id').eql(1);
-                res.body.data[0].should.have.property('topic').eql('Future Transport');
-                res.body.data[0].should.have.property('location').eql('Remera');
-                res.body.data[0].should.have.property('happeningOn').eql('December 28, 2019');
+                res.body.data[0].should.have.property('topic').eql('Electric vehicles');
+                res.body.data[0].should.have.property('location').eql('Kicukiro');
+                res.body.data[0].should.have.property('happeningon').eql('December 12, 2019');
                 res.body.data[0].should.have.property('tags');
-                res.body.data[0].tags.should.be.a('array');
                 done();
                })
 
@@ -63,20 +82,19 @@
  		}
 
  		chai.request(app)
- 		    .post('/api/v1/meetups')
- 		    .send(record)
+			 .post('/api/v1/meetups')
+			 .set('Authorization', token)
+			 .send(record)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
                 res.body.should.have.property('status').eql(201);
                 res.body.should.have.property('data');
                 res.body.data.should.be.a('array');
-                res.body.data[0].should.have.property('id').eql(2);
-                res.body.data[0].should.have.property('createdOn');
+                res.body.data[0].should.have.property('createdon');
                 res.body.data[0].should.have.property('topic').eql('Electronic Values');
                 res.body.data[0].should.have.property('location').eql('kacyiru');
-                res.body.data[0].should.have.property('happeningOn').eql('December 30, 2019');
+                res.body.data[0].should.have.property('happeningon').eql('December 30, 2019');
                 res.body.data[0].should.have.property('tags');
-                res.body.data[0].tags.should.be.a('array');
                 done();
  		    })
  	})
@@ -89,8 +107,9 @@
  		}
 
  		chai.request(app)
- 		    .post('/api/v1/meetups')
- 		    .send(record)
+			 .post('/api/v1/meetups')
+			 .set('Authorization', token)
+			 .send(record)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
                 res.body.should.have.property('status').eql(400);
@@ -108,8 +127,9 @@
  		}
 
  		chai.request(app)
- 		    .post('/api/v1/meetups')
- 		    .send(record)
+			 .post('/api/v1/meetups')
+			 .set('Authorization', token)
+			 .send(record)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
                 res.body.should.have.property('status').eql(400);
@@ -127,8 +147,9 @@
  		}
 
  		chai.request(app)
- 		    .post('/api/v1/meetups')
- 		    .send(record)
+			 .post('/api/v1/meetups')
+			 .set('Authorization', token)
+			 .send(record)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
                 res.body.should.have.property('status').eql(400);
@@ -146,8 +167,10 @@
  		}
 
  		chai.request(app)
- 		    .post('/api/v1/meetups')
- 		    .send(record)
+			 .post('/api/v1/meetups')
+			 .set('Authorization', token)
+			 .send(record)
+			 .set('Authorization', token)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
                 res.body.should.have.property('status').eql(400);
@@ -164,8 +187,9 @@
  		}
 
  		chai.request(app)
- 		    .post('/api/v1/meetups')
- 		    .send(record)
+			 .post('/api/v1/meetups')
+			 .set('Authorization', token)
+			.send(record)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
                 res.body.should.have.property('status').eql(400);
@@ -184,8 +208,9 @@
  		}
 
  		chai.request(app)
- 		    .post('/api/v1/meetups')
- 		    .send(record)
+			 .post('/api/v1/meetups')
+			 .set('Authorization', token)
+			 .send(record)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
                 res.body.should.have.property('status').eql(400);
@@ -204,8 +229,9 @@
  		}
 
  		chai.request(app)
- 		    .post('/api/v1/meetups')
- 		    .send(record)
+			 .post('/api/v1/meetups')
+			 .set('Authorization', token)
+			 .send(record)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
                 res.body.should.have.property('status').eql(400);
@@ -223,8 +249,9 @@
  		}
 
  		chai.request(app)
- 		    .post('/api/v1/meetups')
- 		    .send(record)
+			 .post('/api/v1/meetups')
+			 .set('Authorization', token)
+			 .send(record)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
                 res.body.should.have.property('status').eql(400);
@@ -247,7 +274,8 @@
  		}
 
         chai.request(app)
-             .get('/api/v1/meetup/upcoming')
+			 .get('/api/v1/meetup/upcoming')
+			 .set('Authorization', token)
              .end((err, res)=>{
 
              	res.body.should.be.a('object');
@@ -255,12 +283,11 @@
                 res.body.should.have.property('data');
                 res.body.data.should.be.a('array');
                 res.body.data[0].should.have.property('id').eql(1);
-                res.body.data[0].should.have.property('createdOn');
-                res.body.data[0].should.have.property('topic').eql('Future Transport');
-                res.body.data[0].should.have.property('location').eql('Remera');
-                res.body.data[0].should.have.property('happeningOn').eql('December 28, 2019');
+                res.body.data[0].should.have.property('createdon');
+                res.body.data[0].should.have.property('topic').eql('Electric vehicles');
+                res.body.data[0].should.have.property('location').eql('Kicukiro');
+                res.body.data[0].should.have.property('happeningon').eql('December 12, 2019');
                 res.body.data[0].should.have.property('tags');
-                res.body.data[0].tags.should.be.a('array');
                 done();
              })
 
@@ -278,16 +305,17 @@
  		
 
  		chai.request(app)
- 		    .patch('/api/v1/questions/1/upvote')
+			 .patch('/api/v1/questions/4/upvote')
+			 .set('Authorization', token)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
                 res.body.should.have.property('status').eql(201);
                 res.body.should.have.property('data');
                 res.body.data.should.be.a('array');
-                res.body.data[0].should.have.property('meetup').eql(2);
-                res.body.data[0].should.have.property('body').eql('we are moving into the new era...');
-                res.body.data[0].should.have.property('title').eql('Future Transport');
-                res.body.data[0].should.have.property('upvotes').eql(4);
+                res.body.data[0].should.have.property('meetup').eql(1);
+                res.body.data[0].should.have.property('body').eql('we are in the future now...');
+                res.body.data[0].should.have.property('title').eql('why electric cars?');
+                res.body.data[0].should.have.property('upvotes').eql(1);
                 done();
  		    })
  	})
@@ -299,16 +327,17 @@
  	it('/PATCH /questions/1/downvote', (done)=>{
           
           chai.request(app)
- 		    .patch('/api/v1/questions/1/downvote')
+			 .patch('/api/v1/questions/4/downvote')
+			 .set('Authorization', token)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
                 res.body.should.have.property('status').eql(201);
                 res.body.should.have.property('data');
                 res.body.data.should.be.a('array');
-                res.body.data[0].should.have.property('meetup').eql(2);
-                res.body.data[0].should.have.property('body').eql('we are moving into the new era...');
-                res.body.data[0].should.have.property('title').eql('Future Transport');
-                res.body.data[0].should.have.property('downvotes').eql(3);
+                res.body.data[0].should.have.property('meetup').eql(1);
+                res.body.data[0].should.have.property('body').eql('we are in the future now...');
+                res.body.data[0].should.have.property('title').eql('why electric cars?');
+                res.body.data[0].should.have.property('downvotes').eql(1);
                 done();
  		    });
  	})
@@ -323,9 +352,11 @@
  		  }
           
           chai.request(app)
- 		    .post('/api/v1/meetups/1/rsvps')
- 		    .send(record)
+			 .post('/api/v1/meetups/1/rsvps')
+			 .set('Authorization', token)
+			 .send(record)
  		    .end((err, res)=>{
+				 console.log(token);
  		    	res.body.should.be.a('object');
                 res.body.should.have.property('status').eql(201);
                 res.body.should.have.property('data');
@@ -344,8 +375,9 @@
  		  }
           
           chai.request(app)
- 		    .post('/api/v1/meetups/1/rsvps')
- 		    .send(record)
+			 .post('/api/v1/meetups/1/rsvps')
+			 .set('Authorization', token)
+			 .send(record)
  		    .end((err, res)=>{
  		    	res.body.should.be.a('object');
                 res.body.should.have.property('status').eql(400);
@@ -367,8 +399,9 @@
  		}
 
  		chai.request(app)
- 		    .post('/api/v1/meetups/1/questions')
- 		    .send(record)
+			 .post('/api/v1/meetups/1/questions')
+			 .set('Authorization', token)
+			 .send(record)
  		    .end((err, res)=>{
             
                 res.body.should.be.a('object');
@@ -378,7 +411,7 @@
                 res.body.data[0].should.have.property('title').eql('Future Economics');
                 res.body.data[0].should.have.property('body').eql('How Will It Look like');
                 res.body.data[0].should.have.property('meetup').eql(1);
-                res.body.data[0].should.have.property('user').eql(1);
+                res.body.data[0].should.have.property('createdby').eql(1);
 
                 done();
  		    })
@@ -393,8 +426,9 @@
  		}
 
  		chai.request(app)
- 		    .post('/api/v1/meetups/1/questions')
- 		    .send(record)
+			 .post('/api/v1/meetups/1/questions')
+			 .set('Authorization', token)
+			 .send(record)
  		    .end((err, res)=>{
             
                 res.body.should.be.a('object');
@@ -414,8 +448,9 @@
  		}
 
  		chai.request(app)
- 		    .post('/api/v1/meetups/1/questions')
- 		    .send(record)
+			 .post('/api/v1/meetups/1/questions')
+			 .set('Authorization', token)
+			 .send(record)
  		    .end((err, res)=>{
             
                 res.body.should.be.a('object');
@@ -434,8 +469,9 @@
  		}
 
  		chai.request(app)
- 		    .post('/api/v1/meetups/1/questions')
- 		    .send(record)
+			 .post('/api/v1/meetups/1/questions')
+			 .set('Authorization', token)
+			 .send(record)
  		    .end((err, res)=>{
             
                 res.body.should.be.a('object');
@@ -454,8 +490,9 @@
  		}
 
  		chai.request(app)
- 		    .post('/api/v1/meetups/1/questions')
- 		    .send(record)
+			 .post('/api/v1/meetups/1/questions')
+			 .set('Authorization', token)
+			 .send(record)
  		    .end((err, res)=>{
             
                 res.body.should.be.a('object');
