@@ -7,7 +7,7 @@ class Setup{
        this.pool = new Pool({
            user: process.env.PGUSER,
            host:process.env.PGHOST,
-           database:process.env.PGDATABASE,
+           database:process.env.PGTESTDB,
            password:process.env.PGPASSWORD,
            port:process.env.PGPORT
        });

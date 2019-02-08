@@ -221,10 +221,10 @@ class meetup{
 				})
 				
 			 const { topic } = response.rows[0];
-		
+		     const {id} = req.decode;
              const newRsvp = [
              	response.rows[0].id,
-				 1,
+				 id,
              	req.body.status
 			 ]
 			 const sql1 = `

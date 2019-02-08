@@ -277,7 +277,8 @@ class questions{
 				error:"meetupID must be a number"
             })
         }
-
+        
+        const {id} = req.decode;
         const sql = `
 		SELECT * FROM meetupRecords
 		WHERE id = '${req.params.meetupID}'
@@ -320,7 +321,7 @@ class questions{
 
             const newQuestion = [
                    moment().format('LL'),
-                   1,
+                   id,
                    parseInt(req.params.meetupID),
                    title.trim(),
                    body.trim(),
@@ -331,11 +332,12 @@ class questions{
 
             table.pool.query(sql1, newQuestion)
             .then((resp)=>{
-                const {user, meetup} = resp.rows[0];
+            
+                const {createdby, meetup} = resp.rows[0];
                 return res.status(201).send({
                     status : 201,
                     data : [{
-                        user,
+                        createdby,
                         meetup,
                         title: title.trim(),
                         body: body.trim()
@@ -344,7 +346,7 @@ class questions{
             })
             .catch((err)=>{
                 return res.send({
-                    status:"DB ERROR",
+                    status:"D ERROR",
                     error:err.message
                 })
             })
