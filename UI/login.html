@@ -45,15 +45,61 @@
 <div class="user_login">
 	<p class="login-title"><b>Questioner Log-In</b></p>
 	<form>
-		<div class="lab"> <label for="Email"> <b>Email &nbsp;</b> </label> </div>
-		<input type="text" class="email" id="Email"  name="email" placeholder="Email..."/> <br>
+		<div class="lab"> <label for="userName"> <b>User Name &nbsp;</b> </label> </div>
+		<input type="text" class="email" id="userName"  name="email" placeholder="User Name..."/> <br>
 		<div class="lab"> <label for="pswd1"> <b>Password &nbsp;</b> </label>  </div>
 		<input type="password" id="pswd1" class="email" name="pswd1" placeholder="Password..." /> <br>
 	</form>
 	<br>
-	<div class="login_link"><a  href="main-page.html"><b>LOG IN</b></a> </div>
+	<div class="login_link" id="login"><a  ><b>LOG IN</b></a> </div>
+
+	<div id= "response" class="response"></div>
 
 </div>
+
+
+<script>
+document.getElementById('login').addEventListener('click', userLogin)
+
+function userLogin(){
+	let username = document.getElementById('userName').value;
+	let password = document.getElementById('pswd1').value;
+
+	let data = {
+		username,
+		password
+	}
+	
+
+	fetch('http://localhost:3000/api/v1/auth/login',{
+		method:'POST',
+		headers: {
+          'Accept':'application/json',
+          "Content-Type" : "application/json"
+	  }, 
+	  body: JSON.stringify(data)
+	} )
+	.then((resp) => {
+	return resp.json()
+	})
+	.then((res) => {
+
+		const {status} = res;
+		if(status === 200){
+		  const {token} = res.data[0];
+		  localStorage.setItem('token',token);
+		  location.replace('main-page.html');
+		}
+		else{
+		const {error} = res;
+		document.getElementById('response').innerHTML = error;
+		}
+		
+	})
+
+
+}
+</script>
 
 
 

@@ -20,6 +20,10 @@ header{
 	float: right;
 	display: inline-block;
 }
+
+.response{
+	margin-top: 20px;
+	color: red;
 }
 
 ul{

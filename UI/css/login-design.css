@@ -134,6 +134,11 @@ a:hover{
 	outline:none;
 }
 
+.response{
+	color: red;
+	padding-top: 20px;
+}
+
 
 .login-title{
 	color:#64BD63;
@@ -167,6 +172,7 @@ border:2px solid #64BD63;
 border-radius: 4px;
 padding:10px;
 width: 37%;
+cursor:pointer;
 }
 
 
