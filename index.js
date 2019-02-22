@@ -1,10 +1,12 @@
 import express from 'express';
+import cors from 'cors'
 import meetuproutes from './routes/meetupRoutes';
 import bodyparser from 'body-parser';
 import ENV from 'dotenv';
 ENV.config();
 
 const app = express();
+app.use(cors());
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({
 	extended: false
@@ -16,6 +18,7 @@ const port = process.env.PORT || 3000;
 
 
 app.use(meetuproutes);
+
 
 
 app.use('/', (req, res) =>{

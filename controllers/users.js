@@ -48,7 +48,7 @@ class users{
     }
 
     static signup(req, res){
-
+    console.log(req.body)
         const newUser =[
             req.body.firstname,
             req.body.lastname,
